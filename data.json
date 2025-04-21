@@ -1,0 +1,32 @@
+{
+  "temperature": {
+    "icon": "...",
+    "value": 8,
+    "unit": "¤C",
+    "link": "http..."
+  },
+  "humidity": {
+    "icon": "...",
+    "value": 44,
+    "unit": "%",
+    "link": "http..."
+  },
+  "heartrate": {
+    "icon": "...",
+    "value": 78,
+    "unit": "bpm",
+    "link": "http..."
+  },
+  "steps": {
+    "icon": "...",
+    "value": 5671,
+    "unit": "steps",
+    "link": "http..."
+  },
+  "gas": {
+    "icon": "...",
+    "value": 67,
+    "unit": "m^3",
+    "link": "http..."
+  }
+}
