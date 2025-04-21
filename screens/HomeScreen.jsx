@@ -13,7 +13,7 @@ const HomeScreen = () => {
         <Text style={theme.titleLarge}>Overview</Text>
         <CardSection title="Temperature" />
         <CardSection title="Humidity" />
-        <CardSection title="Heart Rate" />
+        <CardSection title="Heartrate" />
         <CardSection title="Steps" />
         <CardSection title="Gas" />
 
