@@ -13,20 +13,10 @@ const HomeScreen = () => {
         <Text style={theme.titleLarge}>Overview</Text>
         <CardSection title="Temperature" />
         <CardSection title="Humidity" />
-        <CardSection title="Heartrate" />
+        <CardSection title="Heart rate" />
         <CardSection title="Steps" />
         <CardSection title="Gas" />
-
-        <Text style={theme.titleMedium}>Lorem ipsum</Text>
-        <Text style={theme.titleSmall}>Lorem ipsum</Text>
-        <Text style={theme.unitLarge}>
-          44<Text style={theme.unitSmall}> %</Text>
-        </Text>
-        <Text style={theme.textBody}>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro, fugit
-          voluptatem perferendis temporibus consectetur quibusdam veritatis.
-          Aperiam voluptates similique debitis.
-        </Text>
+        <CardSection title="Noise level" />
       </View>
     </Layout>
   );

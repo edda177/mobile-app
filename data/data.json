@@ -1,32 +1,13 @@
 {
-  "temperature": {
-    "icon": "sun-plant-wilt",
-    "value": 8,
-    "unit": "¤C",
-    "link": "http..."
-  },
-  "humidity": {
-    "icon": "...",
-    "value": 44,
-    "unit": "%",
-    "link": "http..."
-  },
-  "heartrate": {
-    "icon": "...",
-    "value": 78,
-    "unit": "bpm",
-    "link": "http..."
-  },
-  "steps": {
-    "icon": "...",
-    "value": 5671,
-    "unit": "steps",
-    "link": "http..."
-  },
-  "gas": {
-    "icon": "...",
-    "value": 67,
-    "unit": "m^3",
-    "link": "http..."
-  }
+  "device_id": "ESP32-001",
+  "timestamp": "2025-04-01T12:34:56Z",
+  "temperature": 22.5,
+  "humidity": 45,
+  "fall_detected": false,
+  "device_battery": 85,
+  "watch_battery": 90,
+  "gas": 400,
+  "steps": 1000,
+  "heart_rate": 75,
+  "noise_level": 80
 }
