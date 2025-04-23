@@ -1,12 +1,13 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { useTheme } from "../context/ThemeContext";
 import Card from "./Card";
 
 const CardSection = ({ title }) => {
+  const { theme } = useTheme(); // Get theme
   const category = title.replaceAll(" ", "_");
   return (
     <View>
-      <Text>{title}</Text>
+      <Text style={theme.textStyles.titleMedium}>{title}</Text>
       <Card title={category.toLowerCase()} />
     </View>
   );

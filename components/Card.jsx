@@ -1,10 +1,11 @@
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
+import { useTheme } from "../context/ThemeContext";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-// import MaterialCommunityIcons from "@expo/vector-icons";
 // import { Link } from "@react-navigation/native";
 
 const Card = ({ title }) => {
+  const { theme } = useTheme(); // Get theme
   const [value, setValue] = useState("");
   const [icon, setIcon] = useState("");
   const [unit, setUnit] = useState("");
@@ -75,17 +76,18 @@ const Card = ({ title }) => {
     }
 
     return (
-      <>
+      <View style={theme.card}>
         <MaterialCommunityIcons name={icon} color="grey" size={50} />
-        <View>
+        <View style={{alignItems:'flex-end'}}>
           <MaterialCommunityIcons name="chevron-right" color="grey" size={16} />
 
-          <Text>
+          <Text style={theme.textStyles.unitLarge}>
             {value}
-            <Text>{unit}</Text>
+            <Text style={theme.textStyles.unitSmall}>
+            {unit}</Text>
           </Text>
         </View>
-      </>
+      </View>
     );
   };
 

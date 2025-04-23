@@ -10,7 +10,7 @@ const HomeScreen = () => {
   return (
     <Layout scrollable>
       <View>
-        <Text style={theme.titleLarge}>Overview</Text>
+        <Text style={theme.textStyles.titleLarge}>Overview</Text>
         <CardSection title="Temperature" />
         <CardSection title="Humidity" />
         <CardSection title="Heart rate" />
