@@ -25,7 +25,7 @@ const Card = ({ title }) => {
       case "temperature":
         setValue(data.temperature);
         setIcon("sun-thermometer-outline");
-        setUnit("*C");
+        setUnit("°C");
         break;
       case "humidity":
         setValue(data.humidity);
@@ -50,7 +50,7 @@ const Card = ({ title }) => {
       case "noise_level":
         setValue(data.noise_level);
         setIcon("ear-hearing");
-        setUnit("*C");
+        setUnit("dB");
         break;
       default:
         // vet inte om denna också ska ändras till setValue()
