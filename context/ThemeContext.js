@@ -109,7 +109,7 @@ const components = {
     marginBottom: spacing.md,
     padding: spacing.sm,
   },
-  cardContainer: {
+  cardWarning: {
     //borderLeftWidth: 8,
     //alignItems: "center",
     backgroundColor: "#fff",
