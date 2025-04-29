@@ -25,7 +25,7 @@ const TestScreen = () => {
       // Rules for when alerts should appear
       if (sensorData.temperature > 26) notifications.push("heat");
       if (sensorData.steps > 6000) notifications.push("steps");
-      if (sensorData.heartRate > 80) notifications.push("heartrate");
+      if (sensorData.heartRate > 125) notifications.push("heartrate");
       if (sensorData.noiseLevel > 70) notifications.push("noise");
       if (sensorData.gasLevel >= 2) notifications.push("gas");
       if (notifications.length === 0) notifications.push('default');

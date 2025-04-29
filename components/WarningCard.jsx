@@ -23,7 +23,7 @@ const warningTypes = {
   },
   heartrate: {
     icon: 'heart-pulse',
-    color: '#FFA000',
+    color: 'red',
     title: 'High heart rate',
     message: 'Elevated heart rate – take a break and breathe.',
   },
@@ -91,8 +91,6 @@ const styles = StyleSheet.create({
   },
 });
 
-        {/* <Text style={theme.textStyles.titleMedium}>{title}</Text> */}
-
   // icon: {
   //   marginRight: 12,
   // },
@@ -110,7 +108,8 @@ const styles = StyleSheet.create({
   //   color: '#444',
   // },
 
-  /* Hur fungerar koden?
+
+/* Hur fungerar koden?
 
 Funktionen får en prop:
 const WarningCard = ({ type = 'default' }) => {
