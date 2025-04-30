@@ -90,10 +90,10 @@ const Card = ({ title }) => {
 
     return (
       <View style={theme.card}>
-        <MaterialCommunityIcons name={icon} color="grey" size={50} />
+        <MaterialCommunityIcons name={icon} color={theme.colors.primary} size={50} />
 
         <View style={{ alignItems: "flex-end" }}>
-          <MaterialCommunityIcons name="chevron-right" color="grey" size={16} />
+          <MaterialCommunityIcons name="chevron-right" color={theme.colors.accent} size={16} />
 
           <Text style={theme.textStyles.unitLarge}>
             {value}

@@ -11,14 +11,15 @@ Vi får fortfarande tillgång till allt via const { theme } = useTheme();.
 
 // Colors
 const colors = {
-  background: '#d9d9d9',
-  primary: '#333',
+  background: '#D5E2E2',
+  primary: '#204054',
   secondary: '#bbb',
-  accent: 'blue',
-  text: '#333',
-  border: 'red',
+  accent: '#46D2CA',
+  warning: '#F26627',
+  text: '#204054',
+  border: '#fff',
   muted: '#666',
-  white: '#fff',
+  snow: '#fff',
 };
 
 // Fonts
@@ -101,7 +102,7 @@ Så "flex" och "space-between" måste skrivas som strängar. */
 const components = {
   card: {
     alignItems: "center", // För vertikal centering
-    backgroundColor: colors.white,
+    backgroundColor: colors.snow,
     borderRadius: radius.md,
     display: "flex", //display: "flex" är överflödigt i React Native, eftersom flex är standard på alla View-komponenter
     flexDirection: "row",
