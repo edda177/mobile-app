@@ -63,7 +63,7 @@ const WarningCard  = ({ type = 'default' }) => {
       
       <View style={{ flex: 1 }}>
         <Text style={theme.textStyles.titleMedium}>{warning.title}</Text>
-        <Text style={[theme.textStyles.bodyText, { flexShrink: 1 }]}>
+        <Text style={[theme.textStyles.textBody, { flexShrink: 1 }]}>
           {warning.message}
         </Text>
       </View>
@@ -84,10 +84,10 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     alignItems: 'center',
     elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    //shadowColor: '#000',
+    //shadowOffset: { width: 0, height: 2 },
+    //shadowOpacity: 0.1,
+    //shadowRadius: 4,
   },
 });
 

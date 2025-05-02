@@ -1,4 +1,6 @@
 import React, { createContext, useContext } from 'react';
+import { View, Text } from 'react-native';
+import { useFonts } from 'expo-font';
 
 /* Struktur med separata blocks och återanvändning - för större appar / team / design systems.
 Då är det ofta bättre att organisera temat hierarkiskt och separat.
@@ -27,7 +29,7 @@ const fonts = {
   heading: 44,
   body: 16,
   small: 14,
-  family: 'System',
+  family: 'Georgia',
 };
 
 // Spacing
@@ -46,51 +48,61 @@ const radius = {
   lg: 16,
 };
 
+const fontStyles = {
+  system: require("../assets/fonts/Quicksand-Regular.ttf"),
+  light: { fontFamily: "Quicksand-Light", fontWeight: "300"},
+  regular: { fontFamily: "Quicksand-Regular", fontWeight: "400"}, 
+  medium: { fontFamily: "Quicksand-Medium", fontWeight: "500"},
+  semibold: { fontFamily: "Quicksand-SemiBold", fontWeight: "600"},
+  bold: { fontFamily: "Quicksand-Bold", fontWeight: "700"},
+};
+
 // Text styles
 const textStyles = {
   textBody: {
     marginBottom: spacing.sm,
     color: colors.text,
+    fontFamily: 'Quicksand-Regular',
     fontSize: fonts.body,
-    fontWeight: '400',
     lineHeight: 22,
   },
   titleLarge: {
     marginBottom: spacing.sm,
     color: colors.text,
+    fontFamily: 'Quicksand-Bold',
     fontSize: 28,
-    fontWeight: '700',
   },
   titleMedium: {
     marginBottom: spacing.sm,
     color: colors.text,
+    fontFamily: 'Quicksand-Bold',
     fontSize: 20,
-    fontWeight: '700',
   },
   titleSmall: {
     marginBottom: spacing.xs,
     color: colors.text,
+    fontFamily: 'Quicksand-Bold',
     fontSize: fonts.body,
     fontWeight: '700',
   },
   titleMeta: {
     marginBottom: spacing.xs,
     color: colors.muted,
+    fontFamily: 'Quicksand-Bold',
     fontSize: fonts.body,
-    letterSpacing: 0.5,
   },
   unitLarge: {
     //marginBottom: spacing.xs,
     color: colors.text,
     fontSize: 40,
     letterSpacing: 0.5,
-    fontWeight: '900',
+    fontFamily: 'Quicksand-Bold',
   },
   unitSmall: {
     //marginBottom: spacing.xs,
     color: colors.text,
     fontSize: 24,
-    fontWeight: '600',
+    fontFamily: 'Quicksand-Bold',
   },
 };
 
@@ -147,6 +159,7 @@ const components = {
   message: {
     flex: 1,
     fontSize: 14,
+    fontFamily: 'Quicksand-Regular',
     color: "#444",
     paddingVertical: 12,
   },
@@ -171,6 +184,19 @@ const theme = {
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
+
+  const [fontsLoaded] = useFonts({
+    "Quicksand-Regular": require("../assets/fonts/Quicksand-Regular.ttf"),
+    "Quicksand-Bold": require("../assets/fonts/Quicksand-Bold.ttf"),
+    "Quicksand-SemiBold": require("../assets/fonts/Quicksand-SemiBold.ttf"),
+    "Quicksand-Medium": require("../assets/fonts/Quicksand-Medium.ttf"),
+    "Quicksand-Light": require("../assets/fonts/Quicksand-Light.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return <View><Text>Loading font....</Text></View>
+  }
+
   return (
     <ThemeContext.Provider value={{ theme }}>
       {children}
@@ -180,107 +206,12 @@ export const ThemeProvider = ({ children }) => {
 
 export const useTheme = () => useContext(ThemeContext);
 
+/*
+Förklaring font:
 
+Vår font laddas via via useFonts.
+För att fonten faktiskt ska kunna används i våra textStyles måste vi ange fontFamily i textstilerna.
 
-// OUR OLD STYLING
-
-/* I mindre till medelstora projekt - direkt referens efteråt är helt okej.
-Enkelt att förstå.
-Lätt att underhålla.
-Vi duplicerar inte data.
-Vi kan lätt ändra t ex theme.colors.border senare, och allt som använder det följer med.
+I React Native (särskilt med egna fonter i Expo) måste vi manuellt ange fontFamily, 
+eftersom enbart fontWeight inte fungerar tillsammans med anpassade fonter om vi inte skapar en variant per vikt.
 */
-
-// import React, { createContext, useContext } from 'react';
-
-// const ThemeContext = createContext();
-
-// const theme = {
-//   colors: {
-//     background: '#d9d9d9',
-//     primary: '#0066cc',
-//     secondary: '#ff4081',
-//     accent: 'blue',
-//     text: '#333',
-//     border: 'red',
-//   },
-//   fonts: {
-//     heading: 44,
-//     body: 16,
-//     small: 14,
-//     family: 'System',
-//   },
-//   spacing: {
-//     xs: 4,
-//     sm: 8,
-//     md: 16,
-//     lg: 24,
-//     xl: 32,
-//   },
-//   radius: {
-//     sm: 4,
-//     md: 8,
-//     lg: 16,
-//   },
-//   textBody: {
-//     marginBottom: 8,
-//     color: '#333',
-//     fontSize: 16,
-//     fontWeight: '400',
-//     lineHeight: 22,
-//   },
-//   titleLarge: {
-//     marginBottom: 8,
-//     color: '#333',
-//     fontSize: 28,
-//     fontWeight: '700',
-//   },
-//   titleMedium: {
-//     marginBottom: 8,
-//     color: '#333',
-//     fontSize: 20,
-//     fontWeight: '700',
-//   },
-//  titleSmall: {
-//    marginBottom: 2,
-//     color: '#333',
-//     fontSize: 16,
-//     fontWeight: '700',
-//   },
-//   titleMeta: {
-//     marginBottom: 2,
-//     color: '#666',
-//     fontSize: 16,
-//     letterSpacing: 0.5,
-//    },
-//    unitLarge: {
-//     marginBottom: 2,
-//     color: '#333',
-//     fontSize: 40,
-//     letterSpacing: 0.5,
-//     fontWeight: '900',
-//    },
-//     unitSmall: {
-//       marginBottom: 2,
-//       color: '#333',
-//       fontSize: 24,
-//       fontWeight: '600',
-//    },
-//    card: {
-//     backgroundColor: '#fff',
-//     borderColor: theme.colors.border,
-//     borderWidth: 1,
-//     padding: 12,
-//     marginBottom: 12,
-//   }
-// };
-
-// export const ThemeProvider = ({ children }) => {
-//   return (
-//     <ThemeContext.Provider value={{ theme }}>
-//       {children}
-//     </ThemeContext.Provider>
-//   );
-// };
-
-// export const useTheme = () => useContext(ThemeContext);
