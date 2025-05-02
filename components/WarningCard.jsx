@@ -44,6 +44,7 @@ const WarningCard  = ({ type = 'default' }) => {
     steps: {
       icon: 'shoe-print',
       color: theme.colors.warning,
+      label: 'Warning',
       title: 'Steps',
       message: "You've walked a lot today – time for a break?",
     },
