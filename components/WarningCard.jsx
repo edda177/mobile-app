@@ -2,53 +2,53 @@ import { View, Text, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 
-const warningTypes = {
-  default: {
-    icon: 'information',
-    color: '#FFA000',
-    title: 'Information',
-    message: 'Please be cautious and stay informed.',
-  },
-  warning: {
-    icon: 'alert-circle',
-    color: 'red',
-    title: 'Warning',
-    message: 'Please be cautious and stay informed.',
-  },
-  heat: {
-    icon: 'weather-sunny-alert',
-    color: 'red',
-    title: 'Heat',
-    message: 'High temperatures today. Stay hydrated and take breaks.',
-  },
-  heartrate: {
-    icon: 'heart-pulse',
-    color: 'red',
-    title: 'High heart rate',
-    message: 'Elevated heart rate – take a break and breathe.',
-  },
- noise: {
-    icon: 'ear-hearing',
-    color: 'red',
-    title: 'High noise level',
-    message: 'Loud environment detected – consider ear protection.',
-  },
-  steps: {
-    icon: 'shoe-print',
-    color: 'red',
-    title: 'Steps',
-    message: "You've walked a lot today – time for a break?",
-  },
-  gas: {
-    icon: 'weather-windy',
-    color: 'red',
-    title: 'Airborne gas detected',
-    message: 'Air quality alert – limit outdoor activity.',
-  },
-};
-
 const WarningCard  = ({ type = 'default' }) => {
   const { theme } = useTheme();
+
+  const warningTypes = {
+    default: {
+      icon: 'information',
+      color: theme.colors.accent,
+      title: 'Information',
+      message: 'Please be cautious and stay informed.',
+    },
+    warning: {
+      icon: 'alert-circle',
+      color: theme.colors.warning,
+      title: 'Warning',
+      message: 'Please be cautious and stay informed.',
+    },
+    heat: {
+      icon: 'weather-sunny-alert',
+      color: theme.colors.warning,
+      title: 'High temperature',
+      message: 'High temperatures today. Stay hydrated and take breaks.',
+    },
+    heartrate: {
+      icon: 'heart-pulse',
+      color: theme.colors.warning,
+      title: 'High heart rate',
+      message: 'Elevated heart rate – take a break and breathe.',
+    },
+   noise: {
+      icon: 'ear-hearing',
+      color: theme.colors.warning,
+      title: 'High noise level',
+      message: 'Loud environment detected – consider ear protection.',
+    },
+    steps: {
+      icon: 'shoe-print',
+      color: theme.colors.warning,
+      title: 'Steps',
+      message: "You've walked a lot today – time for a break?",
+    },
+    gas: {
+      icon: 'weather-windy',
+      color: theme.colors.warning,
+      title: 'Airborne gas detected',
+      message: 'Air quality alert – limit outdoor activity.',
+    },
+  };
 
   const warning = warningTypes[type] || warningTypes.default;
 
@@ -62,7 +62,8 @@ const WarningCard  = ({ type = 'default' }) => {
       />
       
       <View style={{ flex: 1 }}>
-        <Text style={theme.textStyles.titleMedium}>{warning.title}</Text>
+      <Text style={theme.textStyles.textLabel}>Warning</Text>
+        <Text style={theme.textStyles.titleCard}>{warning.title}</Text>
         <Text style={[theme.textStyles.textBody, { flexShrink: 1 }]}>
           {warning.message}
         </Text>
@@ -84,10 +85,10 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     alignItems: 'center',
     elevation: 2,
-    //shadowColor: '#000',
-    //shadowOffset: { width: 0, height: 2 },
-    //shadowOpacity: 0.1,
-    //shadowRadius: 4,
+    // borderTopLeftRadius: 0,
+    // borderTopRightRadius: 10,
+    // borderBottomRightRadius: 10,
+    // borderBottomLeftRadius: 0,
   },
 });
 
