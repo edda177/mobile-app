@@ -49,7 +49,6 @@ const radius = {
 };
 
 const fontStyles = {
-  system: require("../assets/fonts/Quicksand-Regular.ttf"),
   light: { fontFamily: "Quicksand-Light", fontWeight: "300"},
   regular: { fontFamily: "Quicksand-Regular", fontWeight: "400"}, 
   medium: { fontFamily: "Quicksand-Medium", fontWeight: "500"},
@@ -67,7 +66,7 @@ const textStyles = {
     lineHeight: 22,
   },
   titleLarge: {
-    marginBottom: spacing.sm,
+    marginBottom: spacing.md,
     color: colors.text,
     fontFamily: 'Quicksand-Bold',
     fontSize: 28,
@@ -92,17 +91,15 @@ const textStyles = {
     fontSize: fonts.body,
   },
   unitLarge: {
-    //marginBottom: spacing.xs,
     color: colors.text,
     fontSize: 40,
     letterSpacing: 0.5,
     fontFamily: 'Quicksand-Bold',
   },
   unitSmall: {
-    //marginBottom: spacing.xs,
     color: colors.text,
     fontSize: 24,
-    fontFamily: 'Quicksand-Bold',
+    fontFamily: 'Quicksand-SemiBold',
   },
 };
 
@@ -120,7 +117,8 @@ const components = {
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: spacing.md,
-    padding: spacing.sm,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.md,
   },
   cardWarning: {
     //borderLeftWidth: 8,
