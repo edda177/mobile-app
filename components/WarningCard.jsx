@@ -9,29 +9,34 @@ const WarningCard  = ({ type = 'default' }) => {
     default: {
       icon: 'information',
       color: theme.colors.accent,
-      title: 'Information',
+      label: 'Information',
+      title: 'Lorem ipsum',
       message: 'Please be cautious and stay informed.',
     },
     warning: {
       icon: 'alert-circle',
       color: theme.colors.warning,
-      title: 'Warning',
+      label: 'Warning',
+      title: 'Lorem ipsum',
       message: 'Please be cautious and stay informed.',
     },
     heat: {
       icon: 'weather-sunny-alert',
       color: theme.colors.warning,
       title: 'High temperature',
+      label: 'Warning',
       message: 'High temperatures today. Stay hydrated and take breaks.',
     },
     heartrate: {
       icon: 'heart-pulse',
       color: theme.colors.warning,
+      label: 'Warning',
       title: 'High heart rate',
       message: 'Elevated heart rate – take a break and breathe.',
     },
    noise: {
       icon: 'ear-hearing',
+      label: 'Warning',
       color: theme.colors.warning,
       title: 'High noise level',
       message: 'Loud environment detected – consider ear protection.',
@@ -44,6 +49,7 @@ const WarningCard  = ({ type = 'default' }) => {
     },
     gas: {
       icon: 'weather-windy',
+      label: 'Warning',
       color: theme.colors.warning,
       title: 'Airborne gas detected',
       message: 'Air quality alert – limit outdoor activity.',
@@ -62,7 +68,7 @@ const WarningCard  = ({ type = 'default' }) => {
       />
       
       <View style={{ flex: 1 }}>
-      <Text style={theme.textStyles.textLabel}>Warning</Text>
+      <Text style={theme.textStyles.textLabel}>{warning.label}</Text>
         <Text style={theme.textStyles.titleCard}>{warning.title}</Text>
         <Text style={[theme.textStyles.textBody, { flexShrink: 1 }]}>
           {warning.message}
