@@ -1,21 +1,109 @@
+
 # Sentinel Mobile App
 
-## Project description and features
-  This project is a mobile application that....
+A mobile application built with **React Native** and **Expo**, designed to designed to monitor and manage security-related incidents in real time.
+
+---
+
+## Features
+
+- Secure login and authentication
+- Local data storage using Expo Secure Store
+- Responsive and consistent UI with custom fonts
+- Stack-based navigation
+- [LÄGG TILL FLER FUNKTIONER HÄR SEDAN]
+
+---
 
 ## Figma Design
-[Dev Mode Linka](https://www.figma.com/design/A0UtLXheRjdi2yvWByEiVq/Sentinel?node-id=19-101&m=dev&t=T5hnKkVLStgqyAOk-1)
 
-[Prototype Link](https://www.figma.com/proto/A0UtLXheRjdi2yvWByEiVq/Sentinel?node-id=19-101&t=T5hnKkVLStgqyAOk-1)
+- [Dev Mode Link](https://www.figma.com/design/A0UtLXheRjdi2yvWByEiVq/Sentinel?node-id=19-101&m=dev&t=T5hnKkVLStgqyAOk-1)  
+- [Prototype Link](https://www.figma.com/proto/A0UtLXheRjdi2yvWByEiVq/Sentinel?node-id=19-101&t=T5hnKkVLStgqyAOk-1)
 
+---
 
 ## Installation
-  Follow these steps to install and run the project:
+
+### 1. Install Expo CLI (globally, if not already installed)
+
+```bash
+npm install -g expo-cli
 ```
-1. Expo Font:. 
-    " npx expo install expo-font "
+
+### 2. Clone the repository
+
+```bash
+git clone https://github.com/chas-challenge-code-6/mobile-app
+cd mobile.app
 ```
-   
 
+### 3. Install dependencies
 
+#### Expo packages
 
+```bash
+npx expo install expo-font expo-secure-store
+npx expo install @react-navigation/native-stack
+```
+
+#### React Navigation core
+
+```bash
+npm install @react-navigation/native
+```
+
+> Beroende på navigationsstruktur kan följande också behövas:
+> ```bash
+> npm install react-native-screens react-native-safe-area-context
+> ```
+
+---
+
+## Project Structure
+
+```bash
+.
+├── App.js               # Root component
+├── assets/              # Fonts, images etc.
+├── context/             # Theme context 
+├── components/          # Reusable components
+│   └── layout/          # Layout
+├── navigation/          # Navigation configuration  
+├── screens/             # App screens/views
+└── README.md
+```
+
+---
+
+## Running the App
+
+### Start the development server
+
+```bash
+npx expo start
+```
+
+- Press `i` to open in iOS simulator (Mac only)
+- Press `a` to open in Android emulator
+- Scan the QR code in the terminal with the Expo Go app (iOS/Android)
+
+---
+
+## Useful Commands
+
+- Clear cache:  
+  ```bash
+  npx expo start -c
+  ```
+
+- Install a new Expo-compatible package:  
+  ```bash
+  npx expo install [package-name]
+  ```
+
+- Build the app (requires EAS setup):  
+  ```bash
+  npx eas build --platform ios|android
+  ```
+
+---

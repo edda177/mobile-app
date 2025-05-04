@@ -5,6 +5,7 @@ import { useTheme } from "../context/ThemeContext";
 import HomeStack from "./HomeStack";
 import HomeScreen from "../screens/HomeScreen";
 import TestScreen from "../screens/TestScreen";
+import LoginFormScreen from "../screens/LoginFormScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -73,6 +74,15 @@ const Navigation = () => {
           options={{
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="account" color={color} size={size} />
+            ),
+          }}
+        />
+         <Tab.Screen
+          name="Login"
+          component={LoginFormScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="login-variant" color={color} size={size} />
             ),
           }}
         />
