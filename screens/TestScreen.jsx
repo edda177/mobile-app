@@ -42,7 +42,7 @@ const TestScreen = () => {
         <Layout scrollable>
 
           <View style={{ alignItems: 'left', marginBottom: 16 }}>
-            <Logo width={150} height={50} />
+            <Logo width={140} height={34} />
           </View>
 
           <View> 

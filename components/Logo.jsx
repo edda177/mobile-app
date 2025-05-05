@@ -6,7 +6,7 @@ const Logo = ({ width = 220, height = 65 }) => {
     <Svg
       width={width}
       height={height}
-      viewBox="0 0 1803 509.2"
+      viewBox="0 0 1822 509.2"
     >
       <Defs />
       <Path
@@ -18,7 +18,7 @@ const Logo = ({ width = 220, height = 65 }) => {
         y="379.25"
         fontSize="312"
         fontWeight="700"
-        letterSpacing="0.01em"
+        letterSpacing="0.02em"
         fill="#204054"
         fontFamily="Quicksand-Bold"
       >
