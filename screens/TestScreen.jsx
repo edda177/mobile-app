@@ -2,6 +2,7 @@ import { View } from 'react-native'
 import { useTheme } from '../context/ThemeContext';
 import Layout from '../components/layout/Layout';
 import WarningCard from '../components/WarningCard';
+import Logo from '../components/Logo';
 
 const TestScreen = () => {
 	const { theme } = useTheme();
@@ -39,7 +40,12 @@ const TestScreen = () => {
     
       return (
         <Layout scrollable>
-          <View>
+
+          <View style={{ alignItems: 'left', marginBottom: 16 }}>
+            <Logo width={150} height={50} />
+          </View>
+
+          <View> 
             {notifications.map((type, index) => (
               <WarningCard key={index} type={type} />
             ))}
