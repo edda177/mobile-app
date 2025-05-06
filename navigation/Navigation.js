@@ -1,22 +1,37 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useTheme } from "../context/ThemeContext";
 import HomeStack from "./HomeStack";
 import HomeScreen from "../screens/HomeScreen";
 import TestScreen from "../screens/TestScreen";
 import LoginFormScreen from "../screens/LoginFormScreen";
+import { Pressable, Text } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
 const Navigation = () => {
   const { theme } = useTheme();
+  // styling för news-badgen - lite snabbt än så länge
+  const styles = {
+    notice: {
+      position: "absolute",
+      top: "-10",
+      right: "-12",
+    },
+  };
+  // siffra för badgen på hem-tabben - får ändra hur man tar in siffran osv sen
+  const notification = 3;
 
   return (
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={{
-          headerShown: false, // Dölj headern för alla Tab.Screen
+          title: "Sentinel",
+          headerRightContainerStyle: {
+            padding: 16,
+          },
+          // headerShown: false, // Dölj headern för alla Tab.Screen
           tabBarStyle: {
             backgroundColor: theme.colors.primary,
             height: 80,
@@ -30,19 +45,36 @@ const Navigation = () => {
         <Tab.Screen
           name="Home"
           component={HomeStack}
-          options={{
+          options={({ navigation }) => ({
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="home" color={color} size={size} />
             ),
-            //headerShown: true,
-          }}
+            // News-knappen i headern:
+            headerRight: () => (
+              <Pressable onPress={() => navigation.navigate("Testing")}>
+                <Text>News</Text>
+                <MaterialCommunityIcons
+                  name="numeric-3-circle"
+                  color={theme.colors.warning}
+                  size={18}
+                  style={styles.notice}
+                />
+              </Pressable>
+            ),
+            // notis på hem-tabben:
+            tabBarBadge: notification,
+          })}
         />
         <Tab.Screen
           name="News"
-          component={HomeScreen}
+          component={TestScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="newspaper-variant" color={color} size={size} />
+              <MaterialCommunityIcons
+                name="newspaper-variant"
+                color={color}
+                size={size}
+              />
             ),
           }}
         />
@@ -51,7 +83,11 @@ const Navigation = () => {
           component={TestScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="test-tube" color={color} size={size} />
+              <MaterialCommunityIcons
+                name="test-tube"
+                color={color}
+                size={size}
+              />
             ),
           }}
         />
@@ -73,16 +109,24 @@ const Navigation = () => {
           component={HomeScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="account" color={color} size={size} />
+              <MaterialCommunityIcons
+                name="account"
+                color={color}
+                size={size}
+              />
             ),
           }}
         />
-         <Tab.Screen
+        <Tab.Screen
           name="Login"
           component={LoginFormScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="login-variant" color={color} size={size} />
+              <MaterialCommunityIcons
+                name="login-variant"
+                color={color}
+                size={size}
+              />
             ),
           }}
         />

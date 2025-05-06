@@ -10,7 +10,7 @@ const CardSection = ({ title }) => {
   return (
     <View>
       <Text style={theme.textStyles.titleMedium}>{title}</Text>
-      <Pressable onPress={() => navigation.navigate("Temperature")}>
+      <Pressable onPress={() => navigation.navigate("Testing")}>
         <Card title={category.toLowerCase()} />
       </Pressable>
     </View>
