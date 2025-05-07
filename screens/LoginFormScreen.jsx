@@ -27,34 +27,35 @@ const LoginFormScreen = () => {
         <Layout scrollable>
             <View style={styles.container}>
               <Text style={theme.textStyles.titleLarge} accessibilityRole="header">Login</Text>
-              <Text style={theme.textStyles.titleSmall} nativeID="formLabel">Username</Text>
+              <Text style={theme.textStyles.titleSmall}>Username</Text>
                 <TextInput
-                    placeholder="Username"
+                    placeholder="Enter username"
                     value={username}
                     onChangeText={setUsername}
                     autoCapitalize="none"
                     style={styles.input}
                     accessibilityLabelledBy="formLabel"
-                    accessibilityLabel="Username input"
+                    accessibilityLabel="Username input field"
                     accessibilityHint="Enter your username"
 
                 />
-                <Text style={theme.textStyles.titleSmall} nativeID="formLabel">Password</Text>
+                <Text style={theme.textStyles.titleSmall}>Password</Text>
                 <TextInput
                     secureTextEntry
-                    placeholder="Password"
+                    placeholder="Enter password"
                     value={password}
                     onChangeText={setPassword}
                     style={styles.input}
                     accessibilityLabelledBy="formLabel"
-                    accessibilityLabel="Password input"
+                    accessibilityLabel="Password input field"
                     accessibilityHint="Enter your password"
                 />
                 <Pressable 
                   onPress={handleLogin} 
                   style={styles.button} 
                   accessibilityRole="button"
-                  accessibilityLabel="Sign in to your account"
+                  accessibilityLabel="Login button"
+                  accessibilityHint="Log in to your account"
                 >
                   <Text style={{ color: '#fff', textAlign: 'center', fontWeight: 'bold' }}>Login</Text>
                 </Pressable>
@@ -71,8 +72,6 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: '#fff',
-    borderBottomWidth: 1,
-    borderColor: '#ccc',
     borderRadius: 10,
     marginBottom: 12,
     padding: 12,

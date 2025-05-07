@@ -8,9 +8,13 @@ const CardSection = ({ title }) => {
   const category = title.replaceAll(" ", "_");
   const navigation = useNavigation();
   return (
-    <View>
-      <Text style={theme.textStyles.titleMedium}>{title}</Text>
-      <Pressable onPress={() => navigation.navigate("Temperature")}>
+    <View accessible={true}>
+      <Text style={theme.textStyles.titleMedium} accessibilityRole="header">{title}</Text>
+      <Pressable 
+        accessibilityRole="link"
+        accessibilityLabel={`Link to ${title} page`}
+        accessibilityHint={`Go to ${title} page for more information`}
+        onPress={() => navigation.navigate("Temperature")}>
         <Card title={category.toLowerCase()} />
       </Pressable>
     </View>
