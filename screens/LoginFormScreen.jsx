@@ -8,7 +8,7 @@ const LoginFormScreen = () => {
 
     const { theme } = useTheme(); // Get theme
 
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const { login } = useAuth(); // Hämta login-funktionen från context
     const [error, setError] = useState(null);
@@ -16,7 +16,7 @@ const LoginFormScreen = () => {
     const handleLogin = async () => {
         setError(null);
         try {
-        await login(email, password);
+        await login(username, password);
         // Om login lyckas händer inget mer här direkt, men token är nu sparad
         } catch (err) {
         setError('Login failed. Please check your credentials.');
@@ -26,22 +26,36 @@ const LoginFormScreen = () => {
   return (
         <Layout scrollable>
             <View style={styles.container}>
-            <Text style={theme.textStyles.titleLarge}>Login</Text>
+              <Text style={theme.textStyles.titleLarge} accessibilityRole="header">Login</Text>
+              <Text style={theme.textStyles.titleSmall} nativeID="formLabel">Username</Text>
                 <TextInput
-                    placeholder="Email"
-                    value={email}
-                    onChangeText={setEmail}
+                    placeholder="Username"
+                    value={username}
+                    onChangeText={setUsername}
                     autoCapitalize="none"
                     style={styles.input}
+                    accessibilityLabelledBy="formLabel"
+                    accessibilityLabel="Username input"
+                    accessibilityHint="Enter your username"
+
                 />
+                <Text style={theme.textStyles.titleSmall} nativeID="formLabel">Password</Text>
                 <TextInput
+                    secureTextEntry
                     placeholder="Password"
                     value={password}
                     onChangeText={setPassword}
-                    secureTextEntry
                     style={styles.input}
+                    accessibilityLabelledBy="formLabel"
+                    accessibilityLabel="Password input"
+                    accessibilityHint="Enter your password"
                 />
-                <Pressable onPress={handleLogin} style={styles.button}>
+                <Pressable 
+                  onPress={handleLogin} 
+                  style={styles.button} 
+                  accessibilityRole="button"
+                  accessibilityLabel="Sign in to your account"
+                >
                   <Text style={{ color: '#fff', textAlign: 'center', fontWeight: 'bold' }}>Login</Text>
                 </Pressable>
             </View>
@@ -69,3 +83,13 @@ const styles = StyleSheet.create({
     padding: 12,
  },
 });
+
+/* Accessibility
+
+Skärmläsare läser också placeholder, men accessibilityLabel är säkrare och mer konsekvent. 
+
+För pressable: 
+accessibilityState={{ disabled: false, busy: false }}
+Om det finns sådana tillstånd (t ex vid inloggning eller när knappen är inaktiv).
+
+*/
