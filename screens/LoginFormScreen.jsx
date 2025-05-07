@@ -1,8 +1,9 @@
+import { View, TextInput, Text, StyleSheet, Pressable } from 'react-native';
 import { useTheme } from '../context/ThemeContext';
 import Layout from "../components/layout/Layout";
+import PrimaryButton from '../components/PrimaryButton';
 import React, { useState } from 'react';
-import { View, TextInput, Text, StyleSheet, Pressable } from 'react-native';
-import { useAuth } from '../context/AuthContext'; // Använder AuthContext
+import { useAuth } from '../context/AuthContext';
 
 const LoginFormScreen = () => {
 
@@ -30,11 +31,11 @@ const LoginFormScreen = () => {
               <Text style={theme.textStyles.titleSmall}>Username</Text>
                 <TextInput
                     placeholder="Enter username"
+                    placeholderTextColor="#888"
                     value={username}
                     onChangeText={setUsername}
                     autoCapitalize="none"
                     style={styles.input}
-                    accessibilityLabelledBy="formLabel"
                     accessibilityLabel="Username input field"
                     accessibilityHint="Enter your username"
 
@@ -43,22 +44,22 @@ const LoginFormScreen = () => {
                 <TextInput
                     secureTextEntry
                     placeholder="Enter password"
+                    placeholderTextColor="#888"
                     value={password}
                     onChangeText={setPassword}
                     style={styles.input}
-                    accessibilityLabelledBy="formLabel"
                     accessibilityLabel="Password input field"
                     accessibilityHint="Enter your password"
                 />
-                <Pressable 
-                  onPress={handleLogin} 
-                  style={styles.button} 
-                  accessibilityRole="button"
-                  accessibilityLabel="Login button"
-                  accessibilityHint="Log in to your account"
-                >
-                  <Text style={{ color: '#fff', textAlign: 'center', fontWeight: 'bold' }}>Login</Text>
-                </Pressable>
+                
+                <PrimaryButton
+                    title="Login"
+                    onPress={handleLogin} 
+                    variant="primary"
+                    accessibilityRole="button"
+                    accessibilityLabel="Login button"
+                    accessibilityHint="Log in to your account"
+                />
             </View>
     </Layout>
   );

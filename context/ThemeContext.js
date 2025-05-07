@@ -15,7 +15,7 @@ Vi får fortfarande tillgång till allt via const { theme } = useTheme();.
 const colors = {
   background: '#D5E2E2',
   primary: '#204054',
-  secondary: '#bbb',
+  secondary: '#D5E2E2',
   accent: '#46D2CA',
   warning: '#F26627',
   text: '#204054',
