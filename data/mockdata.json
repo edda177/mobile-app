@@ -1,0 +1,11 @@
+{
+  "temperature": 23.5,
+  "humidity": 55,
+  "co2": 400,
+  "co": 5,
+  "acceleration": false,
+  "heart_rate": 72,
+  "noise_level": 40,
+  "battery": 85,
+  "Pedometer": 1234
+}
