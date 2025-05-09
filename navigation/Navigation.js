@@ -6,6 +6,7 @@ import HomeStack from "./HomeStack";
 import HomeScreen from "../screens/HomeScreen";
 import TestScreen from "../screens/TestScreen";
 import LoginFormScreen from "../screens/LoginFormScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -70,7 +71,7 @@ const Navigation = () => {
         />
         <Tab.Screen
           name="Profile"
-          component={HomeScreen}
+          component={ProfileScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="account" color={color} size={size} />
