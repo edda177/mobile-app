@@ -1,4 +1,3 @@
-
 # Sentinel Mobile App
 
 A mobile application built with **React Native** and **Expo**, designed to designed to monitor and manage security-related incidents in real time.
@@ -17,7 +16,7 @@ A mobile application built with **React Native** and **Expo**, designed to desig
 
 ## Figma Design
 
-- [Dev Mode Link](https://www.figma.com/design/A0UtLXheRjdi2yvWByEiVq/Sentinel?node-id=19-101&m=dev&t=T5hnKkVLStgqyAOk-1)  
+- [Dev Mode Link](https://www.figma.com/design/A0UtLXheRjdi2yvWByEiVq/Sentinel?node-id=19-101&m=dev&t=T5hnKkVLStgqyAOk-1)
 - [Prototype Link](https://www.figma.com/proto/A0UtLXheRjdi2yvWByEiVq/Sentinel?node-id=19-101&t=T5hnKkVLStgqyAOk-1)
 
 ---
@@ -53,9 +52,34 @@ npm install @react-navigation/native
 ```
 
 > Beroende på navigationsstruktur kan följande också behövas:
+>
 > ```bash
 > npm install react-native-screens react-native-safe-area-context
 > ```
+
+#### Drawer navigation
+
+```bash
+npm install @react-native/drawer
+```
+
+#### Menu
+
+```bash
+npm install @react-native-menu/menu
+```
+
+> ```jsx
+> Komponent: <MenuView />;
+> ```
+
+>     Props Required
+>
+> | **Prop**      | **Type**                                | Förklaring                                                |
+> | ------------- | --------------------------------------- | --------------------------------------------------------- |
+> | **title**     | string                                  | Menyns titel                                              |
+> | **actions**   | array med ett objekt med: id, title osv | Actions som visas i menyn                                 |
+> | onPressAction | callback function                       | Kallar på funktionen när man trycker på meny-alternativet |
 
 #### Other
 
@@ -71,10 +95,10 @@ npm install react-native-svg
 .
 ├── App.js               # Root component
 ├── assets/              # Fonts, images etc.
-├── context/             # Theme context 
+├── context/             # Theme context
 ├── components/          # Reusable components
 │   └── layout/          # Layout
-├── navigation/          # Navigation configuration  
+├── navigation/          # Navigation configuration
 ├── screens/             # App screens/views
 └── README.md
 ```
@@ -97,17 +121,19 @@ npx expo start
 
 ## Useful Commands
 
-- Clear cache:  
+- Clear cache:
+
   ```bash
   npx expo start -c
   ```
 
-- Install a new Expo-compatible package:  
+- Install a new Expo-compatible package:
+
   ```bash
   npx expo install [package-name]
   ```
 
-- Build the app (requires EAS setup):  
+- Build the app (requires EAS setup):
   ```bash
   npx eas build --platform ios|android
   ```

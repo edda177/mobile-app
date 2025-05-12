@@ -6,7 +6,10 @@ import HomeStack from "./HomeStack";
 import HomeScreen from "../screens/HomeScreen";
 import TestScreen from "../screens/TestScreen";
 import LoginFormScreen from "../screens/LoginFormScreen";
-import { Pressable, Text } from "react-native";
+import { Pressable, Text, View } from "react-native";
+import NewsScreen from "../screens/NewsScreen";
+import { useState } from "react";
+import MenuNavigation from "./MenuNavigation";
 
 const Tab = createBottomTabNavigator();
 
@@ -23,6 +26,7 @@ const Navigation = () => {
   // siffra för badgen på hem-tabben - får ändra hur man tar in siffran osv sen
   const notification = 3;
 
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -67,8 +71,8 @@ const Navigation = () => {
         />
         <Tab.Screen
           name="News"
-          component={TestScreen}
-          options={{
+          component={NewsScreen}
+          options={({ color, navigation }) => ({
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
                 name="newspaper-variant"
@@ -76,7 +80,16 @@ const Navigation = () => {
                 size={size}
               />
             ),
-          }}
+            headerShown: false,
+            // headerRight: () => (
+            //   <View>
+            //     <Pressable onPress={() => setMenuOpen(!menuOpen)}>
+            //       <MaterialCommunityIcons name="menu" size={24} color={color} />
+            //     </Pressable>
+
+            //   </View>
+            // ),
+          })}
         />
         <Tab.Screen
           name="Testing"
