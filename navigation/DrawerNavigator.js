@@ -1,9 +1,10 @@
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import DataScreen from "../screens/DataScreen";
 import { DataStackNavigator, HomeStackNavigator } from "./StackNavigator";
 import TabNavigator from "./TabNavigator";
+import { Image } from "react-native-svg";
 
 const Drawer = createDrawerNavigator();
 
@@ -18,33 +19,57 @@ const screenList = [
 
 const DrawerNavigator = () => {
   return (
-    <Drawer.Navigator
-      screenOptions={{
-        drawerPosition: "right",
-        drawerType: "back",
-        headerStyle: {
-          backgroundColor: "lightpink",
-        },
-      }}
-    >
-      <Drawer.Screen
-        name="Sentinel"
-        component={TabNavigator}
-        options={{
-          drawerItemStyle: {
+    <>
+      <Drawer.Navigator
+        screenOptions={{
+          drawerPosition: "right",
+          drawerType: "back",
+          headerStyle: {
+            backgroundColor: "lightpink",
+          },
+          headerTitleStyle: {
             display: "none",
           },
         }}
-      />
-      {screenList.map((item, index) => (
+      >
         <Drawer.Screen
-          key={index}
-          name={item}
-          component={DataStackNavigator}
-          initialParams={{ stackTitle: item }}
+          name="Sentinel"
+          component={TabNavigator}
+          options={{
+            popToTopOnBlur: true,
+            drawerItemStyle: {
+              display: "none",
+            },
+            headerLeft: () => {
+              return (
+                <View>
+                  <Image source={require("../assets/logo.svg")} />
+                  <Text>Sentinel</Text>
+                </View>
+              );
+            },
+          }}
         />
-      ))}
-    </Drawer.Navigator>
+        {screenList.map((item, index) => (
+          <Drawer.Screen
+            key={index}
+            name={item}
+            component={DataScreen}
+            initialParams={{ stackTitle: item }}
+            options={({ navigation }) => ({
+              headerLeft: () => {
+                return (
+                  <Pressable onPress={() => navigation.navigate("Sentinel")}>
+                    <Image source={require("../assets/logo.svg")} />
+                    <Text>Sentinel</Text>
+                  </Pressable>
+                );
+              },
+            })}
+          />
+        ))}
+      </Drawer.Navigator>
+    </>
   );
 };
 

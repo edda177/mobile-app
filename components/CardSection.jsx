@@ -3,13 +3,13 @@ import { useTheme } from "../context/ThemeContext";
 import Card from "./Card";
 import { useNavigation } from "@react-navigation/native";
 
-const CardSection = ({ navigation, title, route, arrow = true }) => {
+const CardSection = ({ title, route, arrow = true }) => {
   const { theme } = useTheme(); // Get theme
 
   const navigations = useNavigation();
   let category = "";
   const { stackTitle } = route ? route.params : {};
-  if (title !== undefined) {
+  if (title !== undefined || null) {
     category = title.replaceAll(" ", "_");
     console.log("Title from homepage: ", title);
   }
@@ -33,7 +33,7 @@ const CardSection = ({ navigation, title, route, arrow = true }) => {
         } page for more information`}
         onPress={() =>
           navigations.navigate("Back", {
-            cardTitle: title !== undefined ? title : stackTitle,
+            stackTitle: title !== undefined ? title : stackTitle,
           })
         }
       >

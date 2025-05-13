@@ -12,23 +12,23 @@ import {
 } from "./StackNavigator";
 import { useTheme } from "../context/ThemeContext";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import DrawerNavigator from "./DrawerNavigator";
 
 const Tab = createBottomTabNavigator();
-let i = 0;
+
 const TabNavigator = ({ route, navigation }) => {
   const { theme } = useTheme();
   const notification = 3;
   return (
     <Tab.Navigator
       screenOptions={{
-        // title: "Sentinel",
         headerStyle: {
           backgroundColor: "lightblue",
         },
         headerRightContainerStyle: {
           padding: 16,
         },
-        // headerShown: false, // Dölj headern för alla Tab.Screen
+
         tabBarStyle: {
           backgroundColor: theme.colors.primary,
           height: 80,
@@ -66,7 +66,7 @@ const TabNavigator = ({ route, navigation }) => {
       <Tab.Screen
         name="Newss"
         component={NewsStackNavigator}
-        options={({ color, navigation }) => ({
+        options={() => ({
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="newspaper-variant"
@@ -74,15 +74,6 @@ const TabNavigator = ({ route, navigation }) => {
               size={size}
             />
           ),
-          headerShown: true,
-          // headerRight: () => (
-          //   <View>
-          //     <Pressable onPress={() => setMenuOpen(!menuOpen)}>
-          //       <MaterialCommunityIcons name="menu" size={24} color={color} />
-          //     </Pressable>
-
-          //   </View>
-          // ),
         })}
       />
       <Tab.Screen
@@ -133,15 +124,6 @@ const TabNavigator = ({ route, navigation }) => {
           ),
         }}
       />
-      {/* <Tab.Screen
-        name="Data"
-        component={DataStackNavigator}
-        options={{
-          tabBarItemStyle: {
-            display: "none",
-          },
-        }}
-      /> */}
     </Tab.Navigator>
   );
 };

@@ -9,7 +9,6 @@ const Stack = createNativeStackNavigator();
 
 const HomeStackNavigator = ({ route }) => {
   const { title } = route.params || {};
-  console.log(title);
 
   return (
     <Stack.Navigator
