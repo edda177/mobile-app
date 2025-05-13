@@ -7,10 +7,10 @@ import Menu from "../components/Menu";
 const NewsScreen = () => {
   return (
     <Layout scrollable>
-      <Menu />
-      {/* <View>
+      {/* <Menu /> */}
+      <View>
         <Text>NewsScreen</Text>
-      </View> */}
+      </View>
     </Layout>
   );
 };
