@@ -17,6 +17,7 @@ const Card = ({ title, arrow }) => {
   const [unit, setUnit] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  console.log(title);
 
   useEffect(() => {
     const data = require("../data/data.json");
@@ -64,6 +65,7 @@ const Card = ({ title, arrow }) => {
         setUnit("dB");
 
         break;
+
       default:
         // vet inte om denna också ska ändras till setValue()
         value = "Något gick fel";

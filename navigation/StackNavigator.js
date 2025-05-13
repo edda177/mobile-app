@@ -7,11 +7,25 @@ import TestScreen from "../screens/TestScreen";
 
 const Stack = createNativeStackNavigator();
 
-const HomeStackNavigator = () => {
+const HomeStackNavigator = ({ route }) => {
+  const { title } = route.params || {};
+  console.log(title);
+
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "lightgreen",
+        },
+        headerTitle: title,
+      }}
+    >
       <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Data" component={DataScreen} />
+      <Stack.Screen
+        name="Back"
+        component={DataScreen}
+        initialParams={{ title: title }}
+      />
     </Stack.Navigator>
   );
 };
@@ -19,7 +33,13 @@ const HomeStackNavigator = () => {
 const NewsStackNavigator = () => {
   return (
     <Stack.Navigator
-    // screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "lightgreen",
+        },
+      }}
+
+      // screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="Newss" component={NewsScreen} />
     </Stack.Navigator>
@@ -29,7 +49,13 @@ const NewsStackNavigator = () => {
 const TestStackNavigator = () => {
   return (
     <Stack.Navigator
-    // screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "lightgreen",
+        },
+      }}
+
+      // screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="Testing" component={TestScreen} />
     </Stack.Navigator>
@@ -39,9 +65,15 @@ const TestStackNavigator = () => {
 const StatStackNavigator = () => {
   return (
     <Stack.Navigator
-    // screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "lightgreen",
+        },
+      }}
+
+      // screenOptions={{ headerShown: false }}
     >
-      <Stack.Screen name="Testing" component={TestScreen} />
+      <Stack.Screen name="Statistics" component={TestScreen} />
     </Stack.Navigator>
   );
 };
@@ -49,7 +81,13 @@ const StatStackNavigator = () => {
 const ProfileStackNavigator = () => {
   return (
     <Stack.Navigator
-    // screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "lightgreen",
+        },
+      }}
+
+      // screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="Profile" component={ProfileScreen} />
     </Stack.Navigator>
@@ -59,9 +97,28 @@ const ProfileStackNavigator = () => {
 const LoginStackNavigator = () => {
   return (
     <Stack.Navigator
-    // screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "lightgreen",
+        },
+      }}
+
+      // screenOptions={{ headerShown: false }}
     >
-      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="Login" component={ProfileScreen} />
+    </Stack.Navigator>
+  );
+};
+
+const DataStackNavigator = ({ route }) => {
+  const { stackTitle } = route.params;
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Data"
+        component={DataScreen}
+        initialParams={{ stackTitle: stackTitle }}
+      />
     </Stack.Navigator>
   );
 };
@@ -73,4 +130,5 @@ export {
   StatStackNavigator,
   ProfileStackNavigator,
   LoginStackNavigator,
+  DataStackNavigator,
 };

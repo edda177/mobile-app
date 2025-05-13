@@ -3,13 +3,17 @@ import { useTheme } from "../context/ThemeContext";
 import Layout from "../components/layout/Layout";
 import CardSection from "../components/CardSection";
 
-const DataScreen = ({ route }) => {
-  const { title } = route.params || "Temperature";
+const DataScreen = ({ route, title }) => {
+  const { stackTitle } = route.params || "Temperature";
   const { theme } = useTheme();
+  console.log(title);
   return (
     <Layout scrollable>
       <View>
-        <CardSection title={title} arrow={false} />
+        <CardSection
+          title={title !== undefined ? title : stackTitle}
+          arrow={false}
+        />
         <Text style={theme.textStyles.titleMedium}>Averages</Text>
       </View>
     </Layout>

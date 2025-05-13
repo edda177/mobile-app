@@ -8,20 +8,23 @@ import {
   StatStackNavigator,
   ProfileStackNavigator,
   LoginStackNavigator,
+  DataStackNavigator,
 } from "./StackNavigator";
 import { useTheme } from "../context/ThemeContext";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
-
-const TabNavigator = () => {
+let i = 0;
+const TabNavigator = ({ route, navigation }) => {
   const { theme } = useTheme();
   const notification = 3;
   return (
     <Tab.Navigator
       screenOptions={{
         // title: "Sentinel",
-
+        headerStyle: {
+          backgroundColor: "lightblue",
+        },
         headerRightContainerStyle: {
           padding: 16,
         },
@@ -71,7 +74,7 @@ const TabNavigator = () => {
               size={size}
             />
           ),
-          headerShown: false,
+          headerShown: true,
           // headerRight: () => (
           //   <View>
           //     <Pressable onPress={() => setMenuOpen(!menuOpen)}>
@@ -119,7 +122,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name="Login"
-        component={ProfileStackNavigator}
+        component={LoginStackNavigator}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
@@ -130,6 +133,15 @@ const TabNavigator = () => {
           ),
         }}
       />
+      {/* <Tab.Screen
+        name="Data"
+        component={DataStackNavigator}
+        options={{
+          tabBarItemStyle: {
+            display: "none",
+          },
+        }}
+      /> */}
     </Tab.Navigator>
   );
 };
