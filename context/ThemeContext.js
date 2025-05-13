@@ -1,6 +1,6 @@
-import React, { createContext, useContext } from 'react';
-import { View, Text } from 'react-native';
-import { useFonts } from 'expo-font';
+import React, { createContext, useContext } from "react";
+import { View, Text } from "react-native";
+import { useFonts } from "expo-font";
 
 /* Struktur med separata blocks och återanvändning - för större appar / team / design systems.
 Då är det ofta bättre att organisera temat hierarkiskt och separat.
@@ -13,15 +13,15 @@ Vi får fortfarande tillgång till allt via const { theme } = useTheme();.
 
 // Colors
 const colors = {
-  background: '#D5E2E2',
-  primary: '#204054',
-  secondary: '#D5E2E2',
-  accent: '#46D2CA',
-  warning: '#F26627',
-  text: '#204054',
-  border: '#fff',
-  muted: '#666',
-  snow: '#fff',
+  background: "#D5E2E2",
+  primary: "#204054",
+  secondary: "#D5E2E2",
+  accent: "#46D2CA",
+  warning: "#F26627",
+  text: "#204054",
+  border: "#fff",
+  muted: "#666",
+  snow: "#fff",
 };
 
 // Fonts
@@ -29,7 +29,7 @@ const fonts = {
   heading: 44,
   body: 16,
   small: 14,
-  family: 'Georgia',
+  family: "Georgia",
 };
 
 // Spacing
@@ -49,11 +49,11 @@ const radius = {
 };
 
 const fontStyles = {
-  light: { fontFamily: "Quicksand-Light", fontWeight: "300"},
-  regular: { fontFamily: "Quicksand-Regular", fontWeight: "400"}, 
-  medium: { fontFamily: "Quicksand-Medium", fontWeight: "500"},
-  semibold: { fontFamily: "Quicksand-SemiBold", fontWeight: "600"},
-  bold: { fontFamily: "Quicksand-Bold", fontWeight: "700"},
+  light: { fontFamily: "Quicksand-Light", fontWeight: "300" },
+  regular: { fontFamily: "Quicksand-Regular", fontWeight: "400" },
+  medium: { fontFamily: "Quicksand-Medium", fontWeight: "500" },
+  semibold: { fontFamily: "Quicksand-SemiBold", fontWeight: "600" },
+  bold: { fontFamily: "Quicksand-Bold", fontWeight: "700" },
 };
 
 // Text styles
@@ -61,59 +61,59 @@ const textStyles = {
   textBody: {
     marginBottom: spacing.sm,
     color: colors.text,
-    fontFamily: 'Quicksand-Regular',
+    fontFamily: "Quicksand-Regular",
     fontSize: fonts.body,
     lineHeight: 22,
   },
   textLabel: {
     marginBottom: 2,
     color: colors.text,
-    fontFamily: 'Quicksand-Regular',
+    fontFamily: "Quicksand-Regular",
     fontSize: 12,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
     letterSpacing: 0.8,
   },
   titleCard: {
     //marginBottom: 4,
     color: colors.text,
-    fontFamily: 'Quicksand-Bold',
+    fontFamily: "Quicksand-Bold",
     fontSize: 20,
   },
   titleLarge: {
     marginBottom: spacing.md,
     color: colors.text,
-    fontFamily: 'Quicksand-Bold',
+    fontFamily: "Quicksand-Bold",
     fontSize: 28,
   },
   titleMedium: {
     marginBottom: spacing.sm,
     color: colors.text,
-    fontFamily: 'Quicksand-Bold',
+    fontFamily: "Quicksand-Bold",
     fontSize: 20,
   },
   titleSmall: {
     marginBottom: spacing.xs,
     color: colors.text,
-    fontFamily: 'Quicksand-Bold',
+    fontFamily: "Quicksand-Bold",
     fontSize: fonts.body,
-    fontWeight: '700',
+    fontWeight: "700",
   },
   titleMeta: {
     marginBottom: spacing.xs,
     color: colors.muted,
-    fontFamily: 'Quicksand-Bold',
+    fontFamily: "Quicksand-Bold",
     fontSize: fonts.body,
   },
   unitLarge: {
     color: colors.text,
     fontSize: 40,
     letterSpacing: 0.5,
-    fontFamily: 'Quicksand-Bold',
+    fontFamily: "Quicksand-Bold",
   },
   unitSmall: {
     color: colors.text,
     fontSize: 24,
-    fontFamily: 'Quicksand-SemiBold',
+    fontFamily: "Quicksand-SemiBold",
   },
 };
 
@@ -133,6 +133,7 @@ const components = {
     marginBottom: spacing.md,
     paddingVertical: spacing.sm,
     paddingHorizontal: spacing.md,
+    minHeight: 90,
   },
   cardWarning: {
     //borderLeftWidth: 8,
@@ -174,7 +175,7 @@ const components = {
   message: {
     flex: 1,
     fontSize: 14,
-    fontFamily: 'Quicksand-Regular',
+    fontFamily: "Quicksand-Regular",
     color: "#444",
     paddingVertical: 12,
   },
@@ -193,13 +194,12 @@ const theme = {
   spacing,
   radius,
   textStyles,
-  ...components, // Direct access to for example theme.card 
+  ...components, // Direct access to for example theme.card
 };
 
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-
   const [fontsLoaded] = useFonts({
     "Quicksand-Regular": require("../assets/fonts/Quicksand-Regular.ttf"),
     "Quicksand-Bold": require("../assets/fonts/Quicksand-Bold.ttf"),
@@ -209,13 +209,15 @@ export const ThemeProvider = ({ children }) => {
   });
 
   if (!fontsLoaded) {
-    return <View><Text>Loading font....</Text></View>
+    return (
+      <View>
+        <Text>Loading font....</Text>
+      </View>
+    );
   }
 
   return (
-    <ThemeContext.Provider value={{ theme }}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={{ theme }}>{children}</ThemeContext.Provider>
   );
 };
 

@@ -4,6 +4,7 @@ import HomeScreen from "../screens/HomeScreen";
 import TempScreen from "../screens/TempScreen";
 import LoginFormScreen from "../screens/LoginFormScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import DataScreen from "../screens/DataScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ const HomeStack = () => {
       <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Screen name="Statistics" component={HomeScreen} />
       <Stack.Screen name="Login" component={LoginFormScreen} />
+      <Stack.Screen name="Data" component={DataScreen} />
     </Stack.Navigator>
   );
 };

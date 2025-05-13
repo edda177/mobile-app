@@ -7,6 +7,7 @@ import HomeScreen from "../screens/HomeScreen";
 import TestScreen from "../screens/TestScreen";
 import LoginFormScreen from "../screens/LoginFormScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import DataScreen from "../screens/DataScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -43,7 +44,11 @@ const Navigation = () => {
           component={HomeScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="newspaper-variant" color={color} size={size} />
+              <MaterialCommunityIcons
+                name="newspaper-variant"
+                color={color}
+                size={size}
+              />
             ),
           }}
         />
@@ -52,7 +57,11 @@ const Navigation = () => {
           component={TestScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="test-tube" color={color} size={size} />
+              <MaterialCommunityIcons
+                name="test-tube"
+                color={color}
+                size={size}
+              />
             ),
           }}
         />
@@ -74,19 +83,36 @@ const Navigation = () => {
           component={ProfileScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="account" color={color} size={size} />
+              <MaterialCommunityIcons
+                name="account"
+                color={color}
+                size={size}
+              />
             ),
           }}
         />
-         <Tab.Screen
+        <Tab.Screen
           name="Login"
           component={LoginFormScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="login-variant" color={color} size={size} />
+              <MaterialCommunityIcons
+                name="login-variant"
+                color={color}
+                size={size}
+              />
             ),
           }}
         />
+        {/* <Tab.Screen
+          name="Data"
+          component={DataScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="cat" color={color} size={size} />
+            ),
+          }}
+        /> */}
       </Tab.Navigator>
     </NavigationContainer>
   );
