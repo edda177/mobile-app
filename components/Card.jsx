@@ -90,7 +90,7 @@ const Card = ({ title }) => {
 
     return (
       <View style={theme.card}>
-        <MaterialCommunityIcons name={icon} color={theme.colors.primary} size={50} />
+        <MaterialCommunityIcons name={icon} color={theme.colors.icon} size={50} />
 
         <View style={{ alignItems: "flex-end" }}>
           <MaterialCommunityIcons 

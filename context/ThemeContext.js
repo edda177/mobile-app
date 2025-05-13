@@ -1,30 +1,39 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { View, Text } from 'react-native';
 import { useFonts } from 'expo-font';
 
-/* Struktur med separata blocks och återanvändning - för större appar / team / design systems.
-Då är det ofta bättre att organisera temat hierarkiskt och separat.
-Fördelar med detta:
-Alla styles är återanvändbara och tydligt uppdelade.
-Vi kan lätt utöka med fler komponenter (t.ex. button, input, osv.).
-Lättare att tematisera om hela appen eller införa dark mode längre fram.
-Vi får fortfarande tillgång till allt via const { theme } = useTheme();.
-*/
-
-// Colors
-const colors = {
+// Light mode
+const lightColors = {
   background: '#D5E2E2',
   primary: '#204054',
   secondary: '#D5E2E2',
   accent: '#46D2CA',
   warning: '#F26627',
+  heading: '#204054',
   text: '#204054',
+  icon: '#204054',
+  tabicon: '#fff',
+  unit: '#204054',
   border: '#fff',
-  muted: '#666',
   snow: '#fff',
 };
 
-// Fonts
+// Dark mode
+const darkColors = {
+  background: '#204054',
+  primary: '#D5E2E2',
+  secondary: '#D5E2E2',
+  accent: '#46D2CA',
+  warning: '#F26627',
+  heading: '#fff',
+  text: '#204054',
+  icon: '#204054',
+  tabicon: '#204054',
+  unit: '#204054',
+  border: '#fff',
+  snow: '#fff',
+};
+
 const fonts = {
   heading: 44,
   body: 16,
@@ -32,7 +41,6 @@ const fonts = {
   family: 'Georgia',
 };
 
-// Spacing
 const spacing = {
   xs: 4,
   sm: 8,
@@ -41,7 +49,6 @@ const spacing = {
   xl: 32,
 };
 
-// Radius
 const radius = {
   sm: 4,
   md: 8,
@@ -56,8 +63,8 @@ const fontStyles = {
   bold: { fontFamily: "Quicksand-Bold", fontWeight: "700"},
 };
 
-// Text styles
-const textStyles = {
+// Create text styles depening on color theme 
+const getTextStyles = (colors) => ({
   textBody: {
     marginBottom: spacing.sm,
     color: colors.text,
@@ -65,29 +72,15 @@ const textStyles = {
     fontSize: fonts.body,
     lineHeight: 22,
   },
-  textLabel: {
-    marginBottom: 2,
-    color: colors.text,
-    fontFamily: 'Quicksand-Regular',
-    fontSize: 12,
-    textTransform: 'uppercase',
-    letterSpacing: 0.8,
-  },
-  titleCard: {
-    //marginBottom: 4,
-    color: colors.text,
-    fontFamily: 'Quicksand-Bold',
-    fontSize: 20,
-  },
   titleLarge: {
     marginBottom: spacing.md,
-    color: colors.text,
+    color: colors.heading,
     fontFamily: 'Quicksand-Bold',
     fontSize: 28,
   },
   titleMedium: {
     marginBottom: spacing.sm,
-    color: colors.text,
+    color: colors.heading,
     fontFamily: 'Quicksand-Bold',
     fontSize: 20,
   },
@@ -98,70 +91,55 @@ const textStyles = {
     fontSize: fonts.body,
     fontWeight: '700',
   },
+  textLabel: {
+    marginBottom: 2,
+    color: colors.text,
+    fontFamily: 'Quicksand-Regular',
+    fontSize: 12,
+    textTransform: 'uppercase',
+    letterSpacing: 0.8,
+  },
   titleMeta: {
     marginBottom: spacing.xs,
-    color: colors.muted,
+    color: colors.heading,
     fontFamily: 'Quicksand-Bold',
     fontSize: fonts.body,
   },
   unitLarge: {
-    color: colors.text,
+    color: colors.unit,
     fontSize: 40,
     letterSpacing: 0.5,
     fontFamily: 'Quicksand-Bold',
   },
   unitSmall: {
-    color: colors.text,
+    color: colors.unit,
     fontSize: 24,
     fontFamily: 'Quicksand-SemiBold',
   },
-};
+});
 
-// Component styles
-
-/* React Native används JavaScript-objekt för att definiera stilar,
-och värden måste vara strängar om de inte är nummer eller variabelreferenser. 
-Så "flex" och "space-between" måste skrivas som strängar. */
-const components = {
+// Create component styles depening on color theme
+const getComponents = (colors) => ({
   card: {
-    alignItems: "center", // För vertikal centering
+    alignItems: "center",
     backgroundColor: colors.snow,
     borderRadius: radius.md,
-    display: "flex", //display: "flex" är överflödigt i React Native, eftersom flex är standard på alla View-komponenter
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: spacing.md,
     paddingVertical: spacing.sm,
     paddingHorizontal: spacing.md,
   },
-  cardWarning: {
-    //borderLeftWidth: 8,
-    //alignItems: "center",
-    backgroundColor: "#fff",
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 0,
-    flexDirection: "row",
-    marginBottom: 16,
-    overflow: "hidden",
-    paddingRight: 16,
-    //paddingVertical: 12,
-  },
-  cardStripe: {
-    width: 6,
-    backgroundColor: "red",
-    borderTopLeftRadius: radius.md,
-    borderBottomLeftRadius: radius.md,
-    height: "100%",
-    //width: 0, // Använder borderLeft istället
-  },
   icon: {
-    //marginHorizontal: 12,
     alignSelf: "center",
-    // borderWidth: 2,
-    // borderColor: "red",
     paddingHorizontal: 12,
+  },
+  message: {
+    flex: 1,
+    fontSize: 14,
+    fontFamily: 'Quicksand-Regular',
+    color: colors.text,
+    paddingVertical: 12,
   },
   content: {
     flex: 1,
@@ -170,35 +148,36 @@ const components = {
     fontWeight: "600",
     fontSize: 16,
     marginBottom: 4,
+    color: colors.text,
   },
-  message: {
-    flex: 1,
-    fontSize: 14,
-    fontFamily: 'Quicksand-Regular',
-    color: "#444",
-    paddingVertical: 12,
-  },
+});
+
+// Create the theme dynamically
+const createTheme = (mode) => {
+  const colors = mode === 'dark' ? darkColors : lightColors;
+  return {
+    mode,
+    colors,
+    fonts,
+    spacing,
+    radius,
+    fontStyles,
+    textStyles: getTextStyles(colors),
+    ...getComponents(colors),
+  };
 };
 
-const rows = {
-  row: {
-    //flexDirection: "column",
-    justifyContent: "space-between",
-  },
-};
-
-const theme = {
-  colors,
-  fonts,
-  spacing,
-  radius,
-  textStyles,
-  ...components, // Direct access to for example theme.card 
-};
-
+// Context and Provider
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
+  const [mode, setMode] = useState('light'); // Light mode is default
+
+  const toggleTheme = () => {
+    setMode((prev) => (prev === 'light' ? 'dark' : 'light'));
+  };
+
+  const theme = createTheme(mode);
 
   const [fontsLoaded] = useFonts({
     "Quicksand-Regular": require("../assets/fonts/Quicksand-Regular.ttf"),
@@ -209,17 +188,28 @@ export const ThemeProvider = ({ children }) => {
   });
 
   if (!fontsLoaded) {
-    return <View><Text>Loading font....</Text></View>
+    return <View><Text>Loading fonts...</Text></View>;
   }
 
   return (
-    <ThemeContext.Provider value={{ theme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );
 };
 
+// Export hook for use of theme
 export const useTheme = () => useContext(ThemeContext);
+
+
+/* Struktur med separata blocks och återanvändning - för större appar / team / design systems.
+Då är det ofta bättre att organisera temat hierarkiskt och separat.
+Fördelar med detta:
+Alla styles är återanvändbara och tydligt uppdelade.
+Vi kan lätt utöka med fler komponenter (t.ex. button, input, osv.).
+Lättare att tematisera om hela appen eller införa dark mode längre fram.
+Vi får fortfarande tillgång till allt via const { theme } = useTheme();.
+*/
 
 /*
 Förklaring font:
