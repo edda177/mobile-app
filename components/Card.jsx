@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const Card = ({ title }) => {
+const Card = ({ title, arrow }) => {
   const { theme } = useTheme(); // Get theme
 
   const [value, setValue] = useState("");
@@ -90,10 +90,19 @@ const Card = ({ title }) => {
 
     return (
       <View style={theme.card}>
-        <MaterialCommunityIcons name={icon} color={theme.colors.primary} size={50} />
-
+        <MaterialCommunityIcons
+          name={icon}
+          color={theme.colors.primary}
+          size={50}
+        />
         <View style={{ alignItems: "flex-end" }}>
-          <MaterialCommunityIcons name="chevron-right" color={theme.colors.accent} size={24} />
+          {arrow && (
+            <MaterialCommunityIcons
+              name="chevron-right"
+              color={theme.colors.accent}
+              size={24}
+            />
+          )}
 
           <Text style={theme.textStyles.unitLarge}>
             {value}

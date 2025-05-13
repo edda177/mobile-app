@@ -6,10 +6,8 @@ import HomeStack from "./HomeStack";
 import HomeScreen from "../screens/HomeScreen";
 import TestScreen from "../screens/TestScreen";
 import LoginFormScreen from "../screens/LoginFormScreen";
-import { Pressable, Text, View } from "react-native";
-import NewsScreen from "../screens/NewsScreen";
-import { useState } from "react";
-import MenuNavigation from "./MenuNavigation";
+import ProfileScreen from "../screens/ProfileScreen";
+import DataScreen from "../screens/DataScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -119,7 +117,7 @@ const Navigation = () => {
         />
         <Tab.Screen
           name="Profile"
-          component={HomeScreen}
+          component={ProfileScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
@@ -143,6 +141,15 @@ const Navigation = () => {
             ),
           }}
         />
+        {/* <Tab.Screen
+          name="Data"
+          component={DataScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="cat" color={color} size={size} />
+            ),
+          }}
+        /> */}
       </Tab.Navigator>
     </NavigationContainer>
   );

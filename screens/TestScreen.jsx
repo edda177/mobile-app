@@ -3,6 +3,7 @@ import { useTheme } from '../context/ThemeContext';
 import Layout from '../components/layout/Layout';
 import WarningCard from '../components/WarningCard';
 import Logo from '../components/Logo';
+import PrimaryButton from '../components/PrimaryButton';
 
 const TestScreen = () => {
 	const { theme } = useTheme();
@@ -44,6 +45,14 @@ const TestScreen = () => {
           <View style={{ alignItems: 'left', marginBottom: 16 }}>
             <Logo width={140} height={34} />
           </View>
+
+          <PrimaryButton
+            title="Button primary style"
+            variant="primary"
+            accessibilityRole="button"
+            accessibilityLabel="Login button"
+            accessibilityHint="Log in to your account"
+          />
 
           <View> 
             {notifications.map((type, index) => (
