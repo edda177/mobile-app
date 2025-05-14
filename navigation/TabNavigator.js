@@ -22,6 +22,7 @@ const TabNavigator = ({ route, navigation }) => {
   return (
     <Tab.Navigator
       screenOptions={{
+        headerShown: false,
         headerStyle: {
           backgroundColor: "lightblue",
         },
@@ -35,8 +36,12 @@ const TabNavigator = ({ route, navigation }) => {
         },
         tabBarIconStyle: { marginTop: 8 },
         tabBarLabelStyle: { marginBottom: 12, fontSize: 12 },
-        tabBarActiveTintColor: "#fff",
-        tabBarInactiveTintColor: "#fff",
+        // We use colors.icon depending on theme
+        tabBarActiveTintColor: theme.colors.tabicon,
+        tabBarInactiveTintColor: theme.colors.tabicon,
+        /* Om vi vill att aktiva ikoner ska vara en annan färg än inaktiva */
+        // tabBarActiveTintColor: theme.colors.icon,
+        // tabBarInactiveTintColor: theme.mode === 'dark' ? '#aaa' : '#666',
       }}
     >
       <Tab.Screen
@@ -66,7 +71,7 @@ const TabNavigator = ({ route, navigation }) => {
       <Tab.Screen
         name="Newss"
         component={NewsStackNavigator}
-        options={() => ({
+        options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="newspaper-variant"
@@ -74,7 +79,7 @@ const TabNavigator = ({ route, navigation }) => {
               size={size}
             />
           ),
-        })}
+        }}
       />
       <Tab.Screen
         name="Testing"
@@ -96,7 +101,7 @@ const TabNavigator = ({ route, navigation }) => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="chart-line"
-              color={"#fff"}
+              color={color}
               size={size}
             />
           ),

@@ -1,9 +1,9 @@
-import { StyleSheet, Image, Text, View } from 'react-native'
+import { StyleSheet, Image, Text, View,  Switch } from 'react-native'
 import { useTheme } from '../context/ThemeContext';
 import Layout from '../components/layout/Layout';
 
 const ProfileScreen = () => {
-    const { theme } = useTheme();
+    const { theme, toggleTheme } = useTheme();
     return (
         <Layout scrollable>
             <View style={styles.container}>
@@ -13,6 +13,18 @@ const ProfileScreen = () => {
                 />
                 <Text style={theme.textStyles.titleMedium} accessibilityRole="header">Maggie Pearson</Text>
             </View>
+
+            <View style={{ flex: 1, backgroundColor: theme.colors.background, padding: 20 }}>
+                <Text style={[theme.textStyles.titleLarge]}>Profil</Text>
+                <View style={{ marginTop: 20 }}>
+                    <Text style={{ color: theme.colors.heading, marginBottom: 8 }}>Dark Mode</Text>
+                    <Switch
+                        value={theme.mode === 'dark'}
+                        onValueChange={toggleTheme}
+                    />
+                </View>
+            </View>
+
         </Layout>
     )
 };
