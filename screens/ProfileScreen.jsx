@@ -23,12 +23,12 @@ const ProfileScreen = () => {
           padding: 20,
         }}
       >
-        <Text style={[theme.textStyles.titleLarge]}>Profil</Text>
+        <Text style={[theme.textStyles.titleLarge]}>Profile</Text>
         <View style={{ marginTop: 20 }}>
           <Text style={{ color: theme.colors.heading, marginBottom: 8 }}>
             Dark Mode
           </Text>
-          <Switch value={theme.mode === "light"} onValueChange={toggleTheme} />
+          <Switch value={theme.mode === "dark"} onValueChange={toggleTheme} />
         </View>
       </View>
     </Layout>
