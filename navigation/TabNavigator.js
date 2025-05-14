@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, Platform } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
@@ -23,12 +23,6 @@ const TabNavigator = ({ route, navigation }) => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        headerStyle: {
-          backgroundColor: "lightblue",
-        },
-        headerRightContainerStyle: {
-          padding: 16,
-        },
 
         tabBarStyle: {
           backgroundColor: theme.colors.primary,

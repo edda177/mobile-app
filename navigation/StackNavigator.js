@@ -13,10 +13,7 @@ const HomeStackNavigator = ({ route }) => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: {
-          backgroundColor: "lightgreen",
-        },
-        headerTitle: title,
+        headerShown: false,
       }}
     >
       <Stack.Screen name="Home" component={HomeScreen} />
@@ -36,9 +33,8 @@ const NewsStackNavigator = () => {
         headerStyle: {
           backgroundColor: "lightgreen",
         },
+        headerShown: false,
       }}
-
-      // screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="Newss" component={NewsScreen} />
     </Stack.Navigator>
@@ -52,9 +48,8 @@ const TestStackNavigator = () => {
         headerStyle: {
           backgroundColor: "lightgreen",
         },
+        headerShown: false,
       }}
-
-      // screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="Testing" component={TestScreen} />
     </Stack.Navigator>
@@ -68,9 +63,8 @@ const StatStackNavigator = () => {
         headerStyle: {
           backgroundColor: "lightgreen",
         },
+        headerShown: false,
       }}
-
-      // screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="Statistics" component={TestScreen} />
     </Stack.Navigator>
@@ -84,9 +78,8 @@ const ProfileStackNavigator = () => {
         headerStyle: {
           backgroundColor: "lightgreen",
         },
+        headerShown: false,
       }}
-
-      // screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="Profile" component={ProfileScreen} />
     </Stack.Navigator>
@@ -98,11 +91,10 @@ const LoginStackNavigator = () => {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: "lightgreen",
+          backgroundColor: theme.colors.primary,
         },
+        headerShown: false,
       }}
-
-      // screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="Login" component={ProfileScreen} />
     </Stack.Navigator>
@@ -112,7 +104,7 @@ const LoginStackNavigator = () => {
 const DataStackNavigator = ({ route }) => {
   const { stackTitle } = route.params;
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
         name="Data"
         component={DataScreen}

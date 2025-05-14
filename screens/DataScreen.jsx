@@ -6,8 +6,7 @@ import CardSection from "../components/CardSection";
 const DataScreen = ({ route, title }) => {
   const { stackTitle } = route.params || "Temperature";
   const { theme } = useTheme();
-  console.log(title);
-  console.log(stackTitle);
+
   return (
     <Layout scrollable>
       <View>

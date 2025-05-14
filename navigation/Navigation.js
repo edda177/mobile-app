@@ -2,16 +2,36 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import TabNavigator from "./TabNavigator";
 import DrawerNavigator from "./DrawerNavigator";
+import { useTheme } from "../context/ThemeContext";
+import { Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";
 
 const Navigation = () => {
+  const { theme } = useTheme();
+  const styles = createStyles();
   return (
-    <NavigationContainer>
-      <DrawerNavigator />
-    </NavigationContainer>
+    <>
+      <StatusBar
+        barStyle={theme.colors.primary}
+        backgroundColor={theme.background}
+      />
+      <SafeAreaView style={styles.safeArea}>
+        <NavigationContainer>
+          <DrawerNavigator />
+        </NavigationContainer>
+      </SafeAreaView>
+    </>
   );
 };
 
 export default Navigation;
+
+const createStyles = () =>
+  StyleSheet.create({
+    safeArea: {
+      flex: 1,
+      paddingBottom: Platform.OS === "android" ? 50 : 0,
+    },
+  });
 
 // import React from "react";
 // import { NavigationContainer } from "@react-navigation/native";

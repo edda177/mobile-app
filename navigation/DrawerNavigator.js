@@ -1,10 +1,13 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, Platform, StatusBar } from "react-native";
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import DataScreen from "../screens/DataScreen";
 import { DataStackNavigator, HomeStackNavigator } from "./StackNavigator";
 import TabNavigator from "./TabNavigator";
 import { Image } from "react-native-svg";
+import Logo from "../components/Logo";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useTheme } from "../context/ThemeContext";
 
 const Drawer = createDrawerNavigator();
 
@@ -18,18 +21,32 @@ const screenList = [
 ];
 
 const DrawerNavigator = () => {
+  const { theme } = useTheme();
   return (
     <>
       <Drawer.Navigator
         screenOptions={{
           drawerPosition: "right",
-          drawerType: "back",
+          drawerType: "front",
+          swipeEnabled: true,
           headerStyle: {
-            backgroundColor: "lightpink",
+            backgroundColor: theme.colors.primary,
           },
+          drawerStyle: {
+            marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+          },
+          drawerContentStyle: {
+            backgroundColor: theme.colors.background,
+            borderTopLeftRadius: 16,
+            borderBottomLeftRadius: 16,
+          },
+          drawerActiveBackgroundColor: theme.colors.snow,
+          drawerActiveTintColor: theme.colors.heading,
+          drawerInactiveTintColor: theme.colors.heading,
           headerTitleStyle: {
             display: "none",
           },
+          headerTintColor: theme.colors.tabicon,
         }}
       >
         <Drawer.Screen
@@ -40,11 +57,11 @@ const DrawerNavigator = () => {
             drawerItemStyle: {
               display: "none",
             },
-            headerLeft: () => {
+
+            headerTitle: () => {
               return (
                 <View>
-                  <Image source={require("../assets/logo.svg")} />
-                  <Text>Sentinel</Text>
+                  <Logo width={140} height={34} color={theme.colors.tabicon} />
                 </View>
               );
             },
@@ -57,11 +74,28 @@ const DrawerNavigator = () => {
             component={DataScreen}
             initialParams={{ stackTitle: item }}
             options={({ navigation }) => ({
+              headerTitle: () => {
+                return (
+                  <View style={{ justifyContent: "center" }}>
+                    <Logo
+                      width={140}
+                      height={34}
+                      color={theme.colors.tabicon}
+                    />
+                  </View>
+                );
+              },
               headerLeft: () => {
                 return (
-                  <Pressable onPress={() => navigation.navigate("Sentinel")}>
-                    <Image source={require("../assets/logo.svg")} />
-                    <Text>Sentinel</Text>
+                  <Pressable
+                    onPress={() => navigation.navigate("Sentinel")}
+                    style={{ marginLeft: 16 }}
+                  >
+                    <MaterialCommunityIcons
+                      size={34}
+                      color={theme.colors.tabicon}
+                      name="chevron-left"
+                    />
                   </Pressable>
                 );
               },

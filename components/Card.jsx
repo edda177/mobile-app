@@ -17,7 +17,6 @@ const Card = ({ title, arrow }) => {
   const [unit, setUnit] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  console.log(title);
 
   useEffect(() => {
     const data = require("../data/data.json");
@@ -92,7 +91,11 @@ const Card = ({ title, arrow }) => {
 
     return (
       <View style={theme.card}>
-        <MaterialCommunityIcons name={icon} color={theme.colors.icon} size={50} />
+        <MaterialCommunityIcons
+          name={icon}
+          color={theme.colors.icon}
+          size={50}
+        />
 
         <View style={{ alignItems: "flex-end" }}>
           {arrow && (

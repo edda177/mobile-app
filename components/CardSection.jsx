@@ -11,13 +11,11 @@ const CardSection = ({ title, route, arrow = true }) => {
   const { stackTitle } = route ? route.params : {};
   if (title !== undefined || null) {
     category = title.replaceAll(" ", "_");
-    console.log("Title from homepage: ", title);
   }
   if (stackTitle !== undefined) {
     category = stackTitle.replaceAll(" ", "_");
-    console.log("Title from stackparams: ", stackTitle);
   }
-  console.log(category);
+
   return (
     <View accessible={true}>
       <Text style={theme.textStyles.titleMedium} accessibilityRole="header">
