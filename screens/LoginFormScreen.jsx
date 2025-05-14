@@ -28,7 +28,7 @@ const LoginFormScreen = () => {
         <Layout scrollable>
             <View style={styles.container}>
               <Text style={theme.textStyles.titleLarge} accessibilityRole="header">Login</Text>
-              <Text style={theme.textStyles.titleSmall}>Username</Text>
+              <Text style={theme.textStyles.inputTitle}>Username</Text>
                 <TextInput
                     placeholder="Enter username"
                     placeholderTextColor="#888"
@@ -40,7 +40,7 @@ const LoginFormScreen = () => {
                     accessibilityHint="Enter your username"
 
                 />
-                <Text style={theme.textStyles.titleSmall}>Password</Text>
+                <Text style={theme.textStyles.inputTitle}>Password</Text>
                 <TextInput
                     secureTextEntry
                     placeholder="Enter password"

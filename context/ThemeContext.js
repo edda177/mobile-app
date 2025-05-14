@@ -38,7 +38,6 @@ const fonts = {
   heading: 44,
   body: 16,
   small: 14,
-  family: "Georgia",
 };
 
 const spacing = {
@@ -87,6 +86,13 @@ const getTextStyles = (colors) => ({
   titleSmall: {
     marginBottom: spacing.xs,
     color: colors.text,
+    fontFamily: "Quicksand-Bold",
+    fontSize: fonts.body,
+    fontWeight: '700',
+  },
+  inputTitle: {
+    marginBottom: spacing.xs,
+    color: colors.heading,
     fontFamily: "Quicksand-Bold",
     fontSize: fonts.body,
     fontWeight: '700',
