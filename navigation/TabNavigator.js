@@ -63,7 +63,7 @@ const TabNavigator = ({ route, navigation }) => {
         })}
       />
       <Tab.Screen
-        name="Newss"
+        name="News"
         component={NewsStackNavigator}
         options={{
           tabBarIcon: ({ color, size }) => (

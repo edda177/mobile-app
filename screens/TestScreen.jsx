@@ -42,6 +42,12 @@ const TestScreen = () => {
       return (
         <Layout scrollable>
 
+          <View> 
+            {notifications.map((type, index) => (
+              <WarningCard key={index} type={type} />
+            ))}
+          </View>
+
           <View style={{ alignItems: 'left', marginBottom: 16 }}>
             <Logo width={140} height={34} />
           </View>
@@ -54,11 +60,6 @@ const TestScreen = () => {
             accessibilityHint="Log in to your account"
           />
 
-          <View> 
-            {notifications.map((type, index) => (
-              <WarningCard key={index} type={type} />
-            ))}
-          </View>
         </Layout>
       );
     };

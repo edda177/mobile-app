@@ -1,13 +1,16 @@
+//import { useTheme } from "../context/ThemeContext";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../screens/HomeScreen";
 import NewsScreen from "../screens/NewsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import DataScreen from "../screens/DataScreen";
 import TestScreen from "../screens/TestScreen";
+import LoginFormScreen from "../screens/LoginFormScreen";
 
 const Stack = createNativeStackNavigator();
 
 const HomeStackNavigator = ({ route }) => {
+
   const { title } = route.params || {};
 
   return (
@@ -36,7 +39,7 @@ const NewsStackNavigator = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Newss" component={NewsScreen} />
+      <Stack.Screen name="News" component={NewsScreen} />
     </Stack.Navigator>
   );
 };
@@ -87,16 +90,17 @@ const ProfileStackNavigator = () => {
 };
 
 const LoginStackNavigator = () => {
+  //const { theme, toggleTheme } = useTheme(); // Get theme
   return (
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: theme.colors.primary,
+          //backgroundColor: theme.colors.primary,
         },
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Login" component={ProfileScreen} />
+      <Stack.Screen name="Login" component={LoginFormScreen} />
     </Stack.Navigator>
   );
 };
