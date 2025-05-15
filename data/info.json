@@ -1,0 +1,29 @@
+[
+  {
+    "timestamp": "2025-04-01T08:10:13Z",
+    "endtime": "2025-04-03T13:59:59Z",
+    "category": "Meeting",
+    "message": "We will talk about future partnerships of the company",
+    "time": "14.00",
+    "place": "the Conference room",
+    "stamp": "Important"
+  },
+  {
+    "timestamp": "2025-04-04T08:10:13Z",
+    "endtime": "2025-04-04T13:59:59Z",
+    "category": "Celebration",
+    "message": "We invite you all for cake to celebrate the companys 25th birthday",
+    "time": "14.00",
+    "place": "the Conference room",
+    "stamp": "Optional"
+  },
+  {
+    "timestamp": "2025-04-04T14:10:13Z",
+    "endtime": "2025-04-04T17:59:59Z",
+    "category": "Info",
+    "message": "A repair-man will come and look at the second floor's kitchen sink. It may be noisy - you are free to have headphones on during this time",
+    "time": "18.00",
+    "place": "the kitchen",
+    "stamp": "Nonimportant"
+  }
+]

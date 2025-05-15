@@ -1,0 +1,37 @@
+[
+  {
+    "device_id": "ESP32-001",
+    "type": "gas",
+    "value": 1000,
+    "message": "High gas level detected. Get to a clear area as soon as possible. The person in charge is contacted.",
+    "timestamp": "2025-04-01T10:45:22Z"
+  },
+  {
+    "device_id": "ESP32-001",
+    "type": "heart_rate",
+    "value": 150,
+    "message": "High heart rate detected. Take a break and calm down a little.",
+    "timestamp": "2025-04-01T11:45:22Z"
+  },
+  {
+    "device_id": "ESP32-001",
+    "type": "heart_rate",
+    "value": 150,
+    "message": "High heart rate detected. Take a break and calm down a little.",
+    "timestamp": "2025-04-01T12:45:22Z"
+  },
+  {
+    "device_id": "ESP32-001",
+    "type": "temperature",
+    "value": 30,
+    "message": "High temperature level detected. Remember to take breaks more often.",
+    "timestamp": "2025-04-01T13:45:22Z"
+  },
+  {
+    "device_id": "ESP32-001",
+    "type": "noise_level",
+    "value": 100,
+    "message": "High noise level detected. Are you covering your ears with something? Remember to take breaks more often.",
+    "timestamp": "2025-04-01T14:45:22Z"
+  }
+]

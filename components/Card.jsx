@@ -64,7 +64,9 @@ const Card = ({ title, arrow }) => {
         setUnit("dB");
 
         break;
-
+      case "news":
+        console.log("news!");
+        break;
       default:
         // vet inte om denna också ska ändras till setValue()
         value = "Något gick fel";

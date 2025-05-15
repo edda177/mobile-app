@@ -1,15 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+
 import Layout from "../components/layout/Layout";
-import MenuNavigation from "../navigation/MenuNavigation";
-import Menu from "../components/Menu";
+import { useEffect, useState } from "react";
+import CardSection from "../components/CardSection";
 
 const NewsScreen = () => {
   return (
     <Layout scrollable>
-      {/* <Menu /> */}
       <View>
-        <Text>NewsScreen</Text>
+        <CardSection title="News" />
       </View>
     </Layout>
   );

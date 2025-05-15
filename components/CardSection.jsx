@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useTheme } from "../context/ThemeContext";
 import Card from "./Card";
 import { useNavigation } from "@react-navigation/native";
+import NewsCard from "./NewsCard";
 
 const CardSection = ({ title, route, arrow = true }) => {
   const { theme } = useTheme(); // Get theme
@@ -18,7 +19,14 @@ const CardSection = ({ title, route, arrow = true }) => {
 
   return (
     <View accessible={true}>
-      <Text style={theme.textStyles.titleMedium} accessibilityRole="header">
+      <Text
+        style={
+          title === "News"
+            ? theme.textStyles.titleLarge
+            : theme.textStyles.titleMedium
+        }
+        accessibilityRole="header"
+      >
         {title}
       </Text>
       <Pressable
@@ -35,7 +43,11 @@ const CardSection = ({ title, route, arrow = true }) => {
           })
         }
       >
-        <Card title={category.toLowerCase()} arrow={arrow} />
+        {title === "News" ? (
+          <NewsCard />
+        ) : (
+          <Card title={category.toLowerCase()} arrow={arrow} />
+        )}
       </Pressable>
     </View>
   );

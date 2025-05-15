@@ -1,37 +1,37 @@
-import React, { createContext, useContext, useState } from 'react';
-import { View, Text } from 'react-native';
-import { useFonts } from 'expo-font';
+import React, { createContext, useContext, useState } from "react";
+import { View, Text } from "react-native";
+import { useFonts } from "expo-font";
 
 // Light mode
 const lightColors = {
-  background: '#D5E2E2',
-  primary: '#204054',
-  secondary: '#D5E2E2',
-  accent: '#46D2CA',
-  warning: '#F26627',
-  heading: '#204054',
-  text: '#204054',
-  icon: '#204054',
-  tabicon: '#fff',
-  unit: '#204054',
-  border: '#fff',
-  snow: '#fff',
+  background: "#D5E2E2",
+  primary: "#204054",
+  secondary: "#D5E2E2",
+  accent: "#46D2CA",
+  warning: "#F26627",
+  heading: "#204054",
+  text: "#204054",
+  icon: "#204054",
+  tabicon: "#fff",
+  unit: "#204054",
+  border: "#fff",
+  snow: "#fff",
 };
 
 // Dark mode
 const darkColors = {
-  background: '#204054',
-  primary: '#D5E2E2',
-  secondary: '#D5E2E2',
-  accent: '#46D2CA',
-  warning: '#F26627',
-  heading: '#fff',
-  text: '#204054',
-  icon: '#204054',
-  tabicon: '#204054',
-  unit: '#204054',
-  border: '#fff',
-  snow: '#fff',
+  background: "#204054",
+  primary: "#D5E2E2",
+  secondary: "#D5E2E2",
+  accent: "#46D2CA",
+  warning: "#F26627",
+  heading: "#fff",
+  text: "#204054",
+  icon: "#204054",
+  tabicon: "#204054",
+  unit: "#204054",
+  border: "#fff",
+  snow: "#fff",
 };
 
 const fonts = {
@@ -62,7 +62,7 @@ const fontStyles = {
   bold: { fontFamily: "Quicksand-Bold", fontWeight: "700" },
 };
 
-// Create text styles depening on color theme 
+// Create text styles depening on color theme
 const getTextStyles = (colors) => ({
   textBody: {
     marginBottom: spacing.sm,
@@ -70,17 +70,18 @@ const getTextStyles = (colors) => ({
     fontFamily: "Quicksand-Regular",
     fontSize: fonts.body,
     lineHeight: 22,
+    flex: 1,
   },
   titleLarge: {
     marginBottom: spacing.md,
     color: colors.heading,
-    fontFamily: 'Quicksand-Bold',
+    fontFamily: "Quicksand-Bold",
     fontSize: 28,
   },
   titleMedium: {
     marginBottom: spacing.sm,
     color: colors.heading,
-    fontFamily: 'Quicksand-Bold',
+    fontFamily: "Quicksand-Bold",
     fontSize: 20,
   },
   titleSmall: {
@@ -88,27 +89,27 @@ const getTextStyles = (colors) => ({
     color: colors.text,
     fontFamily: "Quicksand-Bold",
     fontSize: fonts.body,
-    fontWeight: '700',
+    fontWeight: "700",
   },
   inputTitle: {
     marginBottom: spacing.xs,
     color: colors.heading,
     fontFamily: "Quicksand-Bold",
     fontSize: fonts.body,
-    fontWeight: '700',
+    fontWeight: "700",
   },
   textLabel: {
     marginBottom: 2,
     color: colors.text,
-    fontFamily: 'Quicksand-Regular',
+    fontFamily: "Quicksand-Regular",
     fontSize: 12,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
     letterSpacing: 0.8,
   },
   titleMeta: {
     marginBottom: spacing.xs,
     color: colors.heading,
-    fontFamily: 'Quicksand-Bold',
+    fontFamily: "Quicksand-Bold",
     fontSize: fonts.body,
   },
   unitLarge: {
@@ -144,7 +145,7 @@ const getComponents = (colors) => ({
   message: {
     flex: 1,
     fontSize: 14,
-    fontFamily: 'Quicksand-Regular',
+    fontFamily: "Quicksand-Regular",
     color: colors.text,
     paddingVertical: 12,
   },
@@ -161,7 +162,7 @@ const getComponents = (colors) => ({
 
 // Create the theme dynamically
 const createTheme = (mode) => {
-  const colors = mode === 'dark' ? darkColors : lightColors;
+  const colors = mode === "dark" ? darkColors : lightColors;
   return {
     mode,
     colors,
@@ -178,10 +179,10 @@ const createTheme = (mode) => {
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [mode, setMode] = useState('light'); // Light mode is default
+  const [mode, setMode] = useState("light"); // Light mode is default
 
   const toggleTheme = () => {
-    setMode((prev) => (prev === 'light' ? 'dark' : 'light'));
+    setMode((prev) => (prev === "light" ? "dark" : "light"));
   };
 
   const theme = createTheme(mode);
@@ -195,7 +196,11 @@ export const ThemeProvider = ({ children }) => {
   });
 
   if (!fontsLoaded) {
-    return <View><Text>Loading fonts...</Text></View>;
+    return (
+      <View>
+        <Text>Loading fonts...</Text>
+      </View>
+    );
   }
 
   return (
@@ -207,7 +212,6 @@ export const ThemeProvider = ({ children }) => {
 
 // Export hook for use of theme
 export const useTheme = () => useContext(ThemeContext);
-
 
 /* Struktur med separata blocks och återanvändning - för större appar / team / design systems.
 Då är det ofta bättre att organisera temat hierarkiskt och separat.
