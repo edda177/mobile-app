@@ -16,6 +16,8 @@ const lightColors = {
   unit: '#204054',
   border: '#fff',
   snow: '#fff',
+  light: '#204054',
+  dark: '#204054',
 };
 
 // Dark mode
@@ -32,6 +34,8 @@ const darkColors = {
   unit: '#204054',
   border: '#fff',
   snow: '#fff',
+  light: '#D5E2E2',
+  dark: '#204054',
 };
 
 const fonts = {
