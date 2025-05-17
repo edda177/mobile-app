@@ -1,12 +1,13 @@
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import { useTheme } from '../context/ThemeContext';
 import Layout from '../components/layout/Layout';
+import ThemeSwitch from "../components/ThemeSwitch";
 import WarningCard from '../components/WarningCard';
 import Logo from '../components/Logo';
 import PrimaryButton from '../components/PrimaryButton';
 
-const TestScreen = () => {
-	const { theme } = useTheme();
+const SettingsScreen = () => {
+ const { theme, toggleTheme } = useTheme(); //  theme: ett objekt som innehåller colors, textStyles m.m och även ett mode - light eller dark
 
     // Dummy sensordata for so long
     const sensorData = {
@@ -42,6 +43,21 @@ const TestScreen = () => {
       return (
         <Layout scrollable>
 
+          <View style={{ marginBottom: 20 }}>
+
+            <Text style={[theme.textStyles.titleLarge]}>Settings</Text>
+
+            <Text style={{ color: theme.colors.heading, marginBottom: 8 }}>
+              {theme.mode === 'dark' ? 'Dark Mode' : 'Light Mode'}
+            </Text>
+
+            <ThemeSwitch
+              isOn={theme.mode === "dark"}
+              onToggle={toggleTheme}
+            />   
+
+          </View>
+
           <View> 
             {notifications.map((type, index) => (
               <WarningCard key={index} type={type} />
@@ -64,7 +80,7 @@ const TestScreen = () => {
       );
     };
 
-export default TestScreen
+export default SettingsScreen
 
 /* Advantages:
 We separate logic from presentation.
