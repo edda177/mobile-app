@@ -41,7 +41,7 @@ const ProfileInfo = () => {
 // Delad renderingsfunktion
 const renderField = (label, value, styles) => (
   <View style={styles.fieldContainer} key={label}>
-    <Text style={theme.textStyles.inputTitle}>{label}</Text>
+    <Text style={styles.label}>{label}</Text>
     <View style={styles.valueContainer}>
       <Text style={styles.value}>{value}</Text>
     </View>
