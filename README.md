@@ -87,6 +87,10 @@ npm install @react-native-menu/menu
 npm install react-native-svg
 ```
 
+```bash
+npm install @react-native-async-storage/async-storage
+```
+
 ---
 
 ## Project Structure

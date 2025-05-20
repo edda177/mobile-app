@@ -1,110 +1,95 @@
 import { View, Text } from 'react-native'
+import { useEffect, useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import Layout from '../components/layout/Layout';
 import ThemeSwitch from "../components/ThemeSwitch";
-import WarningCard from '../components/WarningCard';
-import Logo from '../components/Logo';
-import PrimaryButton from '../components/PrimaryButton';
+import NotificationSwitch from '../components/NotificationSwitch';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SettingsScreen = () => {
- const { theme, toggleTheme } = useTheme(); //  theme: ett objekt som innehåller colors, textStyles m.m och även ett mode - light eller dark
+  // Hämtar aktuellt färgtema och funktion för att byta tema
+  const { theme, toggleTheme } = useTheme();
 
-    // Dummy sensordata for so long
-    const sensorData = {
-        temperature: 28,
-        steps: 6200,
-        heartRate: 85,
-        gasLevel: 2,
-        noiseLevel: 85,
-      };
-    
-      // Starts as an empty list
-      const notifications = [];
+  // Håller koll på om notifikationer är på eller av
+  const [isEnabled, setIsEnabled] = useState(false);
 
-      // Lägger till våra "fasta varningar" - vill bara visa dem tillfälligt
-      notifications.push("default"); 
-      notifications.push("warning"); 
-    
-      // Rules for when alerts should appear
-      if (sensorData.temperature > 26) notifications.push("heat");
-      if (sensorData.steps > 6000) notifications.push("steps");
-      if (sensorData.heartRate > 125) notifications.push("heartrate");
-      if (sensorData.noiseLevel > 70) notifications.push("noise");
-      if (sensorData.gasLevel >= 2) notifications.push("gas");
-      if (notifications.length === 0) notifications.push('default');
+  // Håller koll på om värdet är hämtat från AsyncStorage
+  const [isLoaded, setIsLoaded] = useState(false);
 
-      /* (Ovan skulle kunna vara en for-loop istället för flera if-satser?)
-      Default pushas aldrig in i notifications-listan.
-      Bara om ett sensorvärde är över en viss gräns så lägger vi till t.ex. "heat", "steps", "noise", osv.
-      Så länge inget pushar in "default", kommer inget kort med type="default" att skapas. 
-      Om vi vill visa ett default-kort när inga andra varningar finns, kan vi lägga till:
-      if (notifications.length === 0) notifications.push('default'); */
-    
-      return (
-        <Layout scrollable>
+  // Körs en gång när komponenten laddas
+  useEffect(() => {
+    const loadNotificationSetting = async () => {
+      try {
+        // Försöker hämta tidigare sparat värde för notifikationer
+        const savedValue = await AsyncStorage.getItem('@notifications_enabled');
+        if (savedValue !== null) {
+          // Om ett värde finns, använd det
+          setIsEnabled(JSON.parse(savedValue));
+        } else {
+          // Om inget sparat finns, sätt till "på" som standard
+          setIsEnabled(true);
+          await AsyncStorage.setItem('@notifications_enabled', JSON.stringify(true));
+        }
+      } catch (error) {
+        // Om något går fel, skriv ut felmeddelande i konsolen
+        console.error("Failed to load notification setting", error);
+      } finally {
+        // Oavsett vad som händer – markera att laddningen är klar
+        setIsLoaded(true);
+      }
+    };
+    loadNotificationSetting();
+  }, []);
 
-          <View style={{ marginBottom: 20 }}>
+  // Växlar notifikations-inställningen och sparar det nya värdet
+  const toggleSwitch = async () => {
+    try {
+      const newValue = !isEnabled; // Växla till motsatt värde
+      setIsEnabled(newValue); // Uppdatera state
+      await AsyncStorage.setItem('@notifications_enabled', JSON.stringify(newValue)); // Spara till lagring
+    } catch (error) {
+      console.error("Failed to save notification setting", error);
+    }
+  };
 
-            <Text style={[theme.textStyles.titleLarge]}>Settings</Text>
+  return (
+    <Layout scrollable>
+      <View style={{ marginBottom: 20 }}>
+        <Text style={[theme.textStyles.titleLarge]}>Settings</Text>
 
-            <Text style={{ color: theme.colors.heading, marginBottom: 8 }}>
-              {theme.mode === 'dark' ? 'Dark Mode' : 'Light Mode'}
-            </Text>
+        <Text style={{ color: theme.colors.heading, marginBottom: 8 }}>
+          {theme.mode === 'dark' ? 'Mode: Dark' : 'Mode: Light '}
+        </Text>
 
-            <ThemeSwitch
-              isOn={theme.mode === "dark"}
-              onToggle={toggleTheme}
-            />   
+        <ThemeSwitch
+          isOn={theme.mode === "dark"}
+          onToggle={toggleTheme}
+        />
 
-          </View>
+        <Text style={{ color: theme.colors.heading, marginBottom: 12, marginTop: 8 }}>
+          Choose between Light or Dark Mode to match your visual preferences or environment.
+        </Text>
 
-          <View> 
-            {notifications.map((type, index) => (
-              <WarningCard key={index} type={type} />
-            ))}
-          </View>
+        {isLoaded && (
+        <>
+          <Text style={{ color: theme.colors.heading, marginBottom: 8, marginTop: 12  }}>
+            Notifications: {isEnabled ? 'On' : 'Off'}
+          </Text>
 
-          <View style={{ alignItems: 'left', marginBottom: 16 }}>
-            <Logo width={140} height={34} />
-          </View>
-
-          <PrimaryButton
-            title="Button primary style"
-            variant="primary"
-            accessibilityRole="button"
-            accessibilityLabel="Login button"
-            accessibilityHint="Log in to your account"
+          <NotificationSwitch 
+            isOn={isEnabled} 
+            onToggle={toggleSwitch} 
           />
 
-        </Layout>
-      );
-    };
+          <Text style={{ color: theme.colors.heading, marginTop: 8 }}>
+            We recommend keeping notifications enabled so you don’t miss important alerts and other safety-related information.
+          </Text>
+        </>
+        )}
+      </View>
 
-export default SettingsScreen
+    </Layout>
+  );
+};
 
-/* Advantages:
-We separate logic from presentation.
-We are prepared for API data – just replace sensorData with fetched data.
-We have central threshold logic that is easy to adjust.
-All cards/notices use the same reusable components.
-*/
-
-/* Hur fungerar denna kod? 
-sensorData är en samling testvärden för olika sensorer: temperatur, steg, hjärtfrekvens, gasnivå och bullernivå.
-
-notifications börjar som en tom lista []
-Vi kollar varje sensor:
-Om temperaturen är hög (>26°C) →-lägg till "heat".
-Om stegen är fler än 6000 - lägg till "steps".
-Om hjärtfrekvensen är över 80 - lägg till "heartrate".
-Osv.
-
-För varje värde i notifications, skapas en WarningCard:
-Vi skickar in type som prop till varje WarningCard.
-WarningCard slår upp rätt varning i warningTypes-objektet baserat på type.
-Om inget matchar, använder den default.
-
-notifications = ["heat", "steps", "heartrate", "noise", "gas"]
-Därför behövs inte default – det finns redan riktiga varningar att visa.
-
-*/
+export default SettingsScreen;
