@@ -1,11 +1,5 @@
-import {
-  ActivityIndicator,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-import React, { useEffect, useState } from "react";
+import { ActivityIndicator, Text, View } from "react-native";
+import { useEffect, useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -21,7 +15,6 @@ const Card = ({ title, arrow }) => {
   useEffect(() => {
     const data = require("../data/data.json");
     let value = "";
-    // vet inte om denna behövs??
     if (!data) {
       setIsLoading(false);
       setError("Något gick fel med att hämta datan");
@@ -65,12 +58,13 @@ const Card = ({ title, arrow }) => {
 
         break;
       case "news":
-        console.log("news!");
-        break;
+        setValue("");
+        setIcon("");
+        setUnit("");
+        setError(null);
+        setIsLoading(false);
       default:
-        // vet inte om denna också ska ändras till setValue()
         value = "Något gick fel";
-
         break;
     }
 
@@ -121,5 +115,3 @@ const Card = ({ title, arrow }) => {
 };
 
 export default Card;
-
-const styles = StyleSheet.create({});

@@ -10,7 +10,6 @@ import LoginFormScreen from "../screens/LoginFormScreen";
 const Stack = createNativeStackNavigator();
 
 const HomeStackNavigator = ({ route }) => {
-
   const { title } = route.params || {};
 
   return (
@@ -21,7 +20,7 @@ const HomeStackNavigator = ({ route }) => {
     >
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen
-        name="Back"
+        name="DataScreen"
         component={DataScreen}
         initialParams={{ title: title }}
       />
@@ -29,17 +28,20 @@ const HomeStackNavigator = ({ route }) => {
   );
 };
 
-const NewsStackNavigator = () => {
+const NewsStackNavigator = ({ route }) => {
+  const { title } = route.params || {};
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: {
-          backgroundColor: "lightgreen",
-        },
         headerShown: false,
       }}
     >
       <Stack.Screen name="News" component={NewsScreen} />
+      <Stack.Screen
+        name="DataScreen"
+        component={DataScreen}
+        initialParams={{ title: title }}
+      />
     </Stack.Navigator>
   );
 };
@@ -48,9 +50,6 @@ const TestStackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: {
-          backgroundColor: "lightgreen",
-        },
         headerShown: false,
       }}
     >
@@ -63,9 +62,6 @@ const StatStackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: {
-          backgroundColor: "lightgreen",
-        },
         headerShown: false,
       }}
     >
@@ -78,9 +74,6 @@ const ProfileStackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: {
-          backgroundColor: "lightgreen",
-        },
         headerShown: false,
       }}
     >
@@ -94,9 +87,6 @@ const LoginStackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: {
-          //backgroundColor: theme.colors.primary,
-        },
         headerShown: false,
       }}
     >

@@ -1,6 +1,4 @@
 import { NavigationContainer } from "@react-navigation/native";
-
-import TabNavigator from "./TabNavigator";
 import DrawerNavigator from "./DrawerNavigator";
 import { useTheme } from "../context/ThemeContext";
 import { Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";

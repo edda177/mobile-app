@@ -1,20 +1,32 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useTheme } from "../context/ThemeContext";
 import Layout from "../components/layout/Layout";
 import CardSection from "../components/CardSection";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const DataScreen = ({ route, title }) => {
-  const { stackTitle } = route.params || "Temperature";
+const DataScreen = ({ route, title, navigation }) => {
+  const { stackTitle, prevTitle } = route.params || "Temperature";
   const { theme } = useTheme();
-
+  console.log(stackTitle, prevTitle);
   return (
     <Layout scrollable>
-      <View>
+      <View style={{ flex: 1, gap: 24 }}>
+        <Pressable onPress={() => navigation.goBack()}>
+          <MaterialCommunityIcons
+            name="chevron-left"
+            size={40}
+            color={theme.colors.primary}
+          />
+        </Pressable>
+
         <CardSection
           title={title !== undefined ? title : stackTitle}
+          prevTitle={prevTitle !== undefined ? prevTitle : undefined}
           arrow={false}
         />
-        <Text style={theme.textStyles.titleMedium}>Averages</Text>
+        {prevTitle !== "News" && (
+          <Text style={theme.textStyles.titleMedium}>Averages</Text>
+        )}
       </View>
     </Layout>
   );

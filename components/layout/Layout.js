@@ -1,11 +1,4 @@
-import React from "react";
-import {
-  Platform,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  View,
-} from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
 
 export default function Layout({ children, scrollable = false, style }) {
@@ -14,9 +7,6 @@ export default function Layout({ children, scrollable = false, style }) {
   const Container = scrollable ? ScrollView : View;
 
   return (
-    // <SafeAreaView
-    //   style={[styles.safeArea, { backgroundColor: theme.colors.background }]}
-    // >
     <Container
       contentContainerStyle={scrollable && styles.scrollContainer}
       style={[
@@ -28,7 +18,6 @@ export default function Layout({ children, scrollable = false, style }) {
     >
       {children}
     </Container>
-    // </SafeAreaView>
   );
 }
 

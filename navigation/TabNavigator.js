@@ -1,5 +1,5 @@
 import { View, Text, Pressable, Platform } from "react-native";
-import React from "react";
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   HomeStackNavigator,
@@ -8,15 +8,13 @@ import {
   StatStackNavigator,
   ProfileStackNavigator,
   LoginStackNavigator,
-  DataStackNavigator,
 } from "./StackNavigator";
 import { useTheme } from "../context/ThemeContext";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import DrawerNavigator from "./DrawerNavigator";
 
 const Tab = createBottomTabNavigator();
 
-const TabNavigator = ({ route, navigation }) => {
+const TabNavigator = () => {
   const { theme } = useTheme();
   const notification = 3;
   return (

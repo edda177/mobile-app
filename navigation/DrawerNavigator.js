@@ -73,10 +73,15 @@ const DrawerNavigator = () => {
             name={item}
             component={DataScreen}
             initialParams={{ stackTitle: item }}
-            options={({ navigation }) => ({
+            options={{
               headerTitle: () => {
                 return (
-                  <View style={{ justifyContent: "center" }}>
+                  <View
+                    style={{
+                      justifyContent: "center",
+                      alignItems: "flex-start",
+                    }}
+                  >
                     <Logo
                       width={140}
                       height={34}
@@ -85,21 +90,7 @@ const DrawerNavigator = () => {
                   </View>
                 );
               },
-              headerLeft: () => {
-                return (
-                  <Pressable
-                    onPress={() => navigation.navigate("Sentinel")}
-                    style={{ marginLeft: 16 }}
-                  >
-                    <MaterialCommunityIcons
-                      size={34}
-                      color={theme.colors.tabicon}
-                      name="chevron-left"
-                    />
-                  </Pressable>
-                );
-              },
-            })}
+            }}
           />
         ))}
       </Drawer.Navigator>

@@ -1,4 +1,3 @@
-import React from "react";
 import Svg, { Path, Text, Defs } from "react-native-svg";
 import { useTheme } from "../context/ThemeContext";
 
