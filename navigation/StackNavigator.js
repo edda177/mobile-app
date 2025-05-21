@@ -4,8 +4,8 @@ import HomeScreen from "../screens/HomeScreen";
 import NewsScreen from "../screens/NewsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import DataScreen from "../screens/DataScreen";
-import TestScreen from "../screens/TestScreen";
 import LoginFormScreen from "../screens/LoginFormScreen";
+import SettingsScreen from "../screens/SettingsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -46,14 +46,14 @@ const NewsStackNavigator = ({ route }) => {
   );
 };
 
-const TestStackNavigator = () => {
+const SettingsStackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Testing" component={TestScreen} />
+      <Stack.Screen name="Settings" component={SettingsScreen} />
     </Stack.Navigator>
   );
 };
@@ -65,7 +65,7 @@ const StatStackNavigator = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Statistics" component={TestScreen} />
+      <Stack.Screen name="Statistics" component={SettingsScreen} />
     </Stack.Navigator>
   );
 };
@@ -111,7 +111,7 @@ const DataStackNavigator = ({ route }) => {
 export {
   HomeStackNavigator,
   NewsStackNavigator,
-  TestStackNavigator,
+  SettingsStackNavigator,
   StatStackNavigator,
   ProfileStackNavigator,
   LoginStackNavigator,

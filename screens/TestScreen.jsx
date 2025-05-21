@@ -1,12 +1,12 @@
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import { useTheme } from '../context/ThemeContext';
 import Layout from '../components/layout/Layout';
 import WarningCard from '../components/WarningCard';
 import Logo from '../components/Logo';
 import PrimaryButton from '../components/PrimaryButton';
 
-const TestScreen = () => {
-	const { theme } = useTheme();
+const SettingsScreen = () => {
+ const { theme, toggleTheme } = useTheme(); //  theme: ett objekt som innehåller colors, textStyles m.m och även ett mode - light eller dark
 
     // Dummy sensordata for so long
     const sensorData = {
@@ -64,7 +64,7 @@ const TestScreen = () => {
       );
     };
 
-export default TestScreen
+export default SettingsScreen
 
 /* Advantages:
 We separate logic from presentation.

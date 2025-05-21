@@ -1,7 +1,12 @@
 import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import TabNavigator from "./TabNavigator";
 import DrawerNavigator from "./DrawerNavigator";
 import { useTheme } from "../context/ThemeContext";
 import { Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";
+import EntryScreen from "../screens/EntryScreen";
+
+const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   const { theme } = useTheme();
@@ -14,7 +19,11 @@ const Navigation = () => {
       />
       <SafeAreaView style={styles.safeArea}>
         <NavigationContainer>
-          <DrawerNavigator />
+          {/* <DrawerNavigator /> */}
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Entry" component={EntryScreen} />
+            <Stack.Screen name="MainApp" component={DrawerNavigator} />
+          </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>
     </>

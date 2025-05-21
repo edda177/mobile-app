@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   HomeStackNavigator,
   NewsStackNavigator,
-  TestStackNavigator,
+  SettingsStackNavigator,
   StatStackNavigator,
   ProfileStackNavigator,
   LoginStackNavigator,
@@ -74,19 +74,6 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Testing"
-        component={TestStackNavigator}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="test-tube"
-              color={color}
-              size={size}
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
         name="Statistics"
         component={StatStackNavigator}
         options={{
@@ -105,6 +92,19 @@ const TabNavigator = () => {
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsStackNavigator}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="cog"
+              color={color}
+              size={size}
+            />
           ),
         }}
       />
