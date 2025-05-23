@@ -2,6 +2,7 @@ import { StyleSheet, Image, Text, View } from "react-native";
 import { useTheme } from "../context/ThemeContext";
 import Layout from "../components/layout/Layout";
 import ProfileInfo from "../components/ProfileInfo";
+import PrimaryButton from '../components/PrimaryButton';
 
 const ProfileScreen = () => {
   const { theme, toggleTheme } = useTheme(); //  theme: ett objekt som innehåller colors, textStyles m.m och även ett mode - light eller dark
@@ -26,6 +27,14 @@ const ProfileScreen = () => {
       >
        
       <ProfileInfo />
+
+      <PrimaryButton
+        title="Logout"
+        variant="primary"
+        accessibilityRole="button"
+        accessibilityLabel="Logout"
+        accessibilityHint="Log out from your account"
+      />
 
       </View>
     </Layout>
