@@ -6,7 +6,6 @@ import NewsCard from "./NewsCard";
 import { useState } from "react";
 
 const CardSection = ({ title, prevTitle, route, arrow = true }) => {
-  console.log(title, route);
   const { theme } = useTheme(); // Get theme
   const [news, setNews] = useState([]);
   const navigations = useNavigation();

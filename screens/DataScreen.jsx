@@ -7,7 +7,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 const DataScreen = ({ route, title, navigation }) => {
   const { stackTitle, prevTitle } = route.params || "Temperature";
   const { theme } = useTheme();
-  console.log(stackTitle, prevTitle);
   return (
     <Layout scrollable>
       <View style={{ flex: 1, gap: 24 }}>

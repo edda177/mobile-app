@@ -1,30 +1,50 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import { useTheme } from "../context/ThemeContext";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { months, dates } from "../utils/months";
+import { useEffect, useState } from "react";
 
 const NewsCard = ({ item, arrow, showMore }) => {
   const { theme } = useTheme();
+  const styles = createStyles(theme);
+  const time = item.timestamp;
+  const monthNumber = time.substring(5, 7);
+  const dateNumber = time.substring(8, 10);
+  const yearNumber = time.substring(0, 4);
+  const [date, setDate] = useState("");
+
+  useEffect(() => {
+    const getMonth = () => {
+      const monthResult = months(monthNumber);
+      const dateResult = dates(dateNumber);
+
+      if (!monthResult || !dateResult) {
+        console.error("Något gick fel med tidens hämtning");
+      } else {
+        setDate(`${dateResult} ${monthResult}, ${yearNumber}`);
+      }
+    };
+    getMonth();
+  }, []);
 
   return (
-    <View style={{ flex: 1, gap: 16 }}>
-      <View
-        key={item.id}
-        style={{
-          backgroundColor: theme.colors.snow,
-          borderRadius: theme.radius.lg,
-          paddingHorizontal: 16,
-          paddingVertical: 16,
-          flex: 1,
-          gap: 10,
-        }}
-      >
+    <View style={styles.outerContainer}>
+      <View key={item.id} style={styles.innerContainer}>
+        <View style={styles.topRow}>
+          <Text style={theme.textStyles.textBody}>{date}</Text>
+          <View>
+            {arrow && (
+              <MaterialCommunityIcons
+                name="chevron-right"
+                color={theme.colors.accent}
+                size={24}
+              />
+            )}
+          </View>
+        </View>
         <Image
           source={{ uri: item.image }}
-          style={{
-            width: "100%",
-            height: 280,
-            borderRadius: theme.radius.lg,
-          }}
+          style={styles.image}
           resizeMode="cover"
         />
         <Text style={theme.textStyles.titleMedium}>{item.heading}</Text>
@@ -35,15 +55,6 @@ const NewsCard = ({ item, arrow, showMore }) => {
             {item.message}...
           </Text>
         )}
-        <View style={{ alignItems: "flex-end" }}>
-          {arrow && (
-            <MaterialCommunityIcons
-              name="chevron-right"
-              color={theme.colors.accent}
-              size={24}
-            />
-          )}
-        </View>
       </View>
     </View>
   );
@@ -51,4 +62,28 @@ const NewsCard = ({ item, arrow, showMore }) => {
 
 export default NewsCard;
 
-const styles = StyleSheet.create({});
+const createStyles = (theme) =>
+  StyleSheet.create({
+    outerContainer: {
+      flex: 1,
+      gap: 16,
+    },
+    innerContainer: {
+      backgroundColor: theme.colors.snow,
+      borderRadius: theme.radius.lg,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+      flex: 1,
+      gap: 10,
+    },
+    topRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+    image: {
+      width: "100%",
+      height: 240,
+      borderRadius: theme.radius.lg,
+    },
+  });
