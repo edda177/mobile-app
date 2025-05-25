@@ -1,36 +1,56 @@
+import { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import TabNavigator from "./TabNavigator";
-import DrawerNavigator from "./DrawerNavigator";
-import { useTheme } from "../context/ThemeContext";
 import { Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";
-import EntryScreen from "../screens/EntryScreen";
 
-const Stack = createNativeStackNavigator();
+import { useTheme } from "../context/ThemeContext";
+import { useAuth } from "../context/AuthContext";
+
+import DrawerNavigator from "./DrawerNavigator";
+import EntryScreen from "../screens/EntryScreen";
+import LoginFormScreen from "../screens/LoginFormScreen";
 
 const Navigation = () => {
   const { theme } = useTheme();
+  const { isAuthenticated, loading } = useAuth(); // Här hämtas inloggningsstatus och laddningsstatus från AuthContext
+  const [showSplash, setShowSplash] = useState(true); // Visar en splash screen i 2 sekunder för att ge en smidig uppstart
+  const Stack = createNativeStackNavigator();
   const styles = createStyles();
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowSplash(false), 2000); // 2 sekunder splash
+    return () => clearTimeout(timer);
+  }, []);
+
+  /* Om splash visas eller om vi fortfarande kontrollerar token från SecureStore, 
+  så visas EntryScreen */
+  if (showSplash || loading) {
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <EntryScreen />
+      </SafeAreaView>
+    );
+  }
+
+  /* Om användaren är inloggad (isAuthenticated är true) visas huvudappen (DrawerNavigator)
+  Annars visas inloggningsformuläret (LoginFormScreen) */
   return (
     <>
-      <StatusBar
-        barStyle={theme.colors.primary}
-        backgroundColor={theme.background}
-      />
+      <StatusBar barStyle="light-content" backgroundColor={theme.colors.background} />
       <SafeAreaView style={styles.safeArea}>
         <NavigationContainer>
-          {/* <DrawerNavigator /> */}
           <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Entry" component={EntryScreen} />
-            <Stack.Screen name="MainApp" component={DrawerNavigator} />
+            {isAuthenticated ? (
+              <Stack.Screen name="MainApp" component={DrawerNavigator} />
+            ) : (
+              <Stack.Screen name="Login" component={LoginFormScreen} />
+            )}
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>
     </>
   );
 };
-
-export default Navigation;
 
 const createStyles = () =>
   StyleSheet.create({
@@ -40,203 +60,4 @@ const createStyles = () =>
     },
   });
 
-// import React from "react";
-// import { NavigationContainer } from "@react-navigation/native";
-// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-// import { createNativeStackNavigator } from "@react-navigation/native-stack";
-// import { MaterialCommunityIcons } from "@expo/vector-icons";
-// import { useTheme } from "../context/ThemeContext";
-
-// import HomeScreen from "../screens/HomeScreen";
-// import TempScreen from "../screens/TempScreen";
-// import TestScreen from "../screens/TestScreen";
-
-// const Tab = createBottomTabNavigator();
-// const Stack = createNativeStackNavigator();
-
-// const Tabs = () => {
-//   const { theme } = useTheme();
-
-//   return (
-//     <Tab.Navigator
-//       screenOptions={{
-//         tabBarStyle: {
-//           backgroundColor: theme.colors.primary,
-//           height: 80,
-//         },
-//         tabBarIconStyle: {
-//           marginTop: 8,
-//         },
-//         tabBarLabelStyle: {
-//           marginBottom: 12,
-//           fontSize: 12,
-//         },
-//         tabBarActiveTintColor: '#fff',
-//         tabBarInactiveTintColor: '#fff',
-//       }}
-//     >
-//       <Tab.Screen
-//         name="Home"
-//         component={HomeScreen}
-//         options={{
-//           tabBarIcon: ({ color, size }) => (
-//             <MaterialCommunityIcons name="home" color={color} size={size} />
-//           ),
-//         }}
-//       />
-//       <Tab.Screen
-//         name="News"
-//         component={HomeScreen}
-//         options={{
-//           tabBarIcon: ({ color, size }) => (
-//             <MaterialCommunityIcons name="newspaper-variant" color={color} size={size} />
-//           ),
-//         }}
-//       />
-//       <Tab.Screen
-//         name="Testing"
-//         component={TestScreen}
-//         options={{
-//           tabBarIcon: ({ color, size }) => (
-//             <MaterialCommunityIcons name="coffee" color={color} size={size} />
-//           ),
-//         }}
-//       />
-//       <Tab.Screen
-//         name="Statistics"
-//         component={HomeScreen}
-//         options={{
-//           tabBarIcon: ({ color, size }) => (
-//             <MaterialCommunityIcons name="chart-line" color={color} size={size} />
-//           ),
-//         }}
-//       />
-//       <Tab.Screen
-//         name="Profile"
-//         component={HomeScreen}
-//         options={{
-//           tabBarIcon: ({ color, size }) => (
-//             <MaterialCommunityIcons name="account" color={color} size={size} />
-//           ),
-//         }}
-//       />
-//     </Tab.Navigator>
-//   );
-// };
-
-// const Navigation = () => {
-//   return (
-//     <NavigationContainer>
-//       <Stack.Navigator>
-//         <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
-//         <Stack.Screen name="Temperature" component={TempScreen} />
-//         {/* Lägg till fler skärmar här om du har fler */}
-//       </Stack.Navigator>
-//     </NavigationContainer>
-//   );
-// };
-
-// export default Navigation;
-
-// import React from "react";
-// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-// import { NavigationContainer } from "@react-navigation/native";
-// import { createNativeStackNavigator } from "@react-navigation/native-stack";
-// import { MaterialCommunityIcons } from "@expo/vector-icons";
-// import { useTheme } from "../context/ThemeContext";
-// import HomeScreen from "../screens/HomeScreen";
-// import TempScreen from "../screens/TempScreen";
-// import TestScreen from "../screens/TestScreen";
-
-// const Tab = createBottomTabNavigator();
-// const Stack = createNativeStackNavigator();
-
-// const Navigation = () => {
-//   const { theme } = useTheme(); // Get theme
-//   return (
-//     <NavigationContainer>
-//     <Tab.Navigator
-//         screenOptions={{
-//           tabBarStyle: {
-//             backgroundColor: theme.colors.primary,
-//             height: 80, // Ökar höjden (standard är ca 60)
-//           },
-//           tabBarIconStyle: {
-//             marginTop: 8, // Flytta ner ikonen något så den inte hamnar för högt
-//           },
-//           tabBarActiveTintColor: '#fff', // Färg på aktiv ikon/text
-//           tabBarInactiveTintColor: '#fff', // Färg på inaktiva ikoner
-//           //headerShown: false, // Döljer översta rubriken om vi inte vill visa den
-//           tabBarLabelStyle: {
-//             marginBottom: 12, // Flyttar upp texten lite så den närmar sig mitten
-//             fontSize: 12, // Justera vid behov
-//           },
-//         }}
-//     >
-//         <Tab.Screen
-//           name="Home"
-//           component={HomeScreen}
-//           options={{
-//             tabBarIcon: ({ color, size }) => (
-//               <MaterialCommunityIcons name="home" color={"#fff"} size={size} />
-//             ),
-//           }}
-//         />
-//         <Tab.Screen
-//           name="News"
-//           component={HomeScreen}
-//           options={{
-//             tabBarIcon: ({ color, size }) => (
-//               <MaterialCommunityIcons
-//                 name="newspaper-variant"
-//                 color={"#fff"}
-//                 size={size}
-//               />
-//             ),
-//           }}
-//         />
-//         <Tab.Screen
-//           name="Testing"
-//           component={TestScreen}
-//           options={{
-//             tabBarIcon: ({ color, size }) => (
-//               <MaterialCommunityIcons
-//                 name="coffee"
-//                 color={"#fff"}
-//                 size={size}
-//               />
-//             ),
-//           }}
-//         />
-//         <Tab.Screen
-//           name="Statistics"
-//           component={HomeScreen}
-//           options={{
-//             tabBarIcon: ({ color, size }) => (
-//               <MaterialCommunityIcons
-//                 name="chart-line"
-//                 color={"#fff"}
-//                 size={size}
-//               />
-//             ),
-//           }}
-//         />
-//         <Tab.Screen
-//           name="Profile"
-//           component={HomeScreen}
-//           options={{
-//             tabBarIcon: ({ color, size }) => (
-//               <MaterialCommunityIcons
-//                 name="account"
-//                 color={"#fff"}
-//                 size={size}
-//               />
-//             ),
-//           }}
-//         />
-//       </Tab.Navigator>
-//     </NavigationContainer>
-//   );
-// };
-
-// export default Navigation;
+export default Navigation;

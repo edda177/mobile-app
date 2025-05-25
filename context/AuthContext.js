@@ -1,103 +1,108 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import { createContext, useState, useContext, useEffect } from 'react';
 import * as SecureStore from 'expo-secure-store';
 
-// Skapar ett nytt context-objekt
-const AuthContext = createContext();
+/* Expo-secure-store fungerar inte i webbläsare – bara i Android/iOS. 
+Om vi vill stötta webben måste vi lägga till ett fallback som t ex använder AsyncStorage i webbläsaren. */
+import { Platform } from 'react-native'; 
 
-// AuthProvider-komponenten wrappas runt appen och tillhandahåller auth-data
+/* Skapar en global inloggningskontext som andra komponenter i appen 
+kan använda för att veta om användaren är inloggad eller inte */
+const AuthContext = createContext(); 
+
+// Wrapper för SecureStore + fallback till localStorage på webben
+// Eget objekt: Storage – fungerar både på mobil och webb
+// När vi vill HÄMTA ett värde, kollar vi om vi kör i webbläsare (Platform.OS === 'web')
+// Om ja: använd localStorage, annars expo-secure-store
+const Storage = {
+  getItemAsync: async (key) => {
+    if (Platform.OS === 'web') {
+      return localStorage.getItem(key);
+    } else {
+      return await SecureStore.getItemAsync(key);
+    }
+  },
+  // När vi vill SPARA ett värde, kollar vi om vi kör i webbläsare (Platform.OS === 'web')
+  // Om ja: använd localStorage, annars expo-secure-store 
+  setItemAsync: async (key, value) => {
+    if (Platform.OS === 'web') {
+      localStorage.setItem(key, value);
+    } else {
+      await SecureStore.setItemAsync(key, value);
+    }
+  },
+  // När vi vill TA BORT (LOGGA UT) ett värde, kollar vi om vi kör i webbläsare (Platform.OS === 'web')
+  // Om ja: använd localStorage, annars expo-secure-store 
+   deleteItemAsync: async (key) => {
+    if (Platform.OS === 'web') {
+      localStorage.removeItem(key); // För webb
+    } else {
+      await SecureStore.deleteItemAsync(key); // För mobil
+    }
+  },
+};
+
+// Den här komponenten lindar in hela appen så att alla barnkomponenter får tillgång till inloggningsinfo
 export const AuthProvider = ({ children }) => {
-  const [userToken, setUserToken] = useState(null); // Håller aktuell token
+  // Två tillstånd:
+  const [isAuthenticated, setIsAuthenticated] = useState(false); //  isAuthenticated = om användaren är inloggad
+  const [loading, setLoading] = useState(true); // loading = om vi fortfarande laddar data (t ex kontrollerar om token finns)
 
-  // Körs en gång när appen startar – hämtar token om den finns
+  /* När appen startar körs checkToken(). Den försöker hämta ett sparat token.
+  Om det finns ett token (!!token = true), sätts isAuthenticated till true.
+  Annars blir det false. I båda fall: loading sätts till false när vi är klara. */
   useEffect(() => {
-    const getToken = async () => {
-      const token = await SecureStore.getItemAsync('userToken');
-      if (token) {
-        setUserToken(token);
+    const checkToken = async () => {
+      console.log("Run checkToken");
+      try {
+        const token = await Storage.getItemAsync('token');
+        console.log("Token found:", token);
+        setIsAuthenticated(!!token);
+      } catch (err) {
+        console.error("Failed to load token:", err);
+        setIsAuthenticated(false);
+      } finally {
+        setLoading(false);
       }
     };
-    getToken();
+
+    checkToken();
   }, []);
 
-  // Loggar in användaren och sparar token
-  const login = async (email, password) => {
-    try {
-      // Skicka POST-förfrågan till API (byt till vår faktiska URL)
-      // Försöker just nu skicka en POST-förfrågan till en API-url som inte existerar (så login() kommer att misslyckas
-      // Om den hade fungerat, skulle den spara token i enheten via expo-secure-store
-      // Den sparade token finns i userToken och kan användas för att styra flöden (t ex om användaren är inloggad eller inte)
-      const response = await axios.post('https://our-api.com/login', { // Denna url är bara en platshållare, vi behöver få en riktig token
-        email,
-        password,
-      });
-
-      const token = response.data.token;
-
-      // Spara token säkert
-      await SecureStore.setItemAsync('userToken', token);
-
-      // Uppdatera state
-      setUserToken(token);
-    } catch (error) {
-      console.error('Login error:', error);
-      throw error; // Skicka vidare till den som kallar på login()
+  /* Ett enkelt "låtsas-login". Just nu loggar vi in vem som helst som fyller i något i formuläret.
+  Om användaren skriver in inloggningsuppgifter – eller just guest/guest – sparas en token.
+  Användaren markeras som inloggad (setIsAuthenticated(true)). 
+  */
+  const login = async (username, password) => {
+    if ((username === "guest" && password === "guest") || (username && password)) {
+      await Storage.setItemAsync("token", "dummyToken123");
+      setIsAuthenticated(true);
+    } else {
+      throw new Error("Invalid credentials");
     }
   };
 
-  // Loggar ut användaren
+  // Tar bort token. Markerar användaren som utloggad.
   const logout = async () => {
-    await SecureStore.deleteItemAsync('userToken');
-    setUserToken(null);
+    await Storage.deleteItemAsync("token");
+    setIsAuthenticated(false);
   };
 
+  // Gör isAuthenticated, login(), logout() och loading tillgängliga för alla komponenter via context
   return (
-    <AuthContext.Provider value={{ userToken, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-// Exporterar en custom hook för att vi ska kunna använda auth-funktioner
 export const useAuth = () => useContext(AuthContext);
 
-/* Vad är en token? 
+/* 
 
-En token (oftast en JWT – JSON Web Token) är en liten datasträng som skapas av backend vid inloggning. Den används för att:
-Identifiera användaren i efterföljande API-anrop (utan att behöva skicka lösenordet varje gång).
-Verifiera att användaren är inloggad.
+Hook för att använda auth-funktioner i komponenter:
+export const useAuth = () => useContext(AuthContext);
 
-Exempel på en token:
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-
-Backendens ansvar:
-En faktisk inloggnings-API-endpoint (t ex https://api.dittföretag.se/auth/login)
-
-När man skickar email + password dit, ska den returnera:
-
-json
-{ "token": "eyJhbGciOiJIUzI1Ni..." }
-
-Om detta inte finns ännu, behöver vi be backend-utvecklarna att:
-
-Implementera inloggnings-API som returnerar en token vid lyckad inloggning.
-Berätta hur token ska användas (t ex i headers när du hämtar data efter inloggning).
-
-Fråga backend-teamet:
-
-Finns en inloggnings-endpoint?
-Vilken URL ska vi anropa?
-Hur returneras token (exakt struktur)?
-Behöver vi headers vid efterföljande anrop?
-
-Annars:
-Fortsätta lokalt med testtoken:
-För test kan vi hårdkoda en token i login:
-
-const fakeToken = 'my-hardcoded-token';
-await SecureStore.setItemAsync('userToken', fakeToken);
-setUserToken(fakeToken);
-
-Vi kan mocka login med en testtoken, så kan vi prova hela flödet utan riktig backend.
+När vi vill använda auth någonstans i vår app (t ex LoginFormScreen), skriver vi:
+const { login, logout, isAuthenticated } = useAuth() 
 
 */

@@ -1,11 +1,12 @@
-import { View, TextInput, Text, StyleSheet, Pressable } from 'react-native';
+import { View, TextInput, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import { useTheme } from '../context/ThemeContext';
 import Layout from "../components/layout/Layout";
 import PrimaryButton from '../components/PrimaryButton';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 
-const LoginFormScreen = () => {
+// const LoginFormScreen = () => {
+const LoginFormScreen = ({ navigation }) => {
 
     const { theme } = useTheme(); // Get theme
 
@@ -15,13 +16,12 @@ const LoginFormScreen = () => {
     const [error, setError] = useState(null);
 
     const handleLogin = async () => {
-        setError(null);
-        try {
-        await login(username, password);
-        // Om login lyckas händer inget mer här direkt, men token är nu sparad
-        } catch (err) {
-        setError('Login failed. Please check your credentials.');
-        }
+      setError(null);
+      try {
+        await login(username, password); // Anropare login från AuthContext
+      } catch (err) {
+        setError("Login failed. Please check your credentials.");
+      }
     };
 
   return (
@@ -60,6 +60,15 @@ const LoginFormScreen = () => {
                     accessibilityLabel="Login button"
                     accessibilityHint="Log in to your account"
                 />
+
+                {/* Tillfällig länk till HomeScreen */}
+                <TouchableOpacity
+                  onPress={() => login("guest", "guest")}
+                  style={styles.linkContainer}
+                >
+                  <Text style={styles.linkText}>Fortsätt utan att logga in</Text>
+                </TouchableOpacity>
+
             </View>
     </Layout>
   );
@@ -82,7 +91,25 @@ const styles = StyleSheet.create({
     borderRadius: 10,     
     padding: 12,
  },
+ linkContainer: {
+    marginTop: 20,
+  },
+  linkText: {
+    color: "blue",
+    textDecorationLine: "underline",
+  },
 });
+
+
+    // const handleLogin = async () => {
+    //     setError(null);
+    //     try {
+    //     await login(username, password);
+    //     // Om login lyckas händer inget mer här direkt, men token är nu sparad
+    //     } catch (err) {
+    //     setError('Login failed. Please check your credentials.');
+    //     }
+    // };
 
 /* Accessibility
 

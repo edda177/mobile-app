@@ -2,6 +2,7 @@ import { ActivityIndicator, Text, View } from "react-native";
 import { useEffect, useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { getData } from "../services/api";
 
 const Card = ({ title, arrow }) => {
   const { theme } = useTheme(); // Get theme
@@ -12,13 +13,19 @@ const Card = ({ title, arrow }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const data = require("../data/data.json");
-    let value = "";
-    if (!data) {
-      setIsLoading(false);
-      setError("Något gick fel med att hämta datan");
-    }
+  // useEffect(() => {
+  //   const data = require("../data/data.json");
+  //   let value = "";
+  //   if (!data) {
+  //     setIsLoading(false);
+  //     setError("Något gick fel med att hämta datan");
+  //   }
+
+    useEffect(() => {
+      const apiData = getData(title);
+      console.log(apiData);
+      const data = require("../data/data.json");
+      let value = "";
 
     switch (title) {
       case "temperature":

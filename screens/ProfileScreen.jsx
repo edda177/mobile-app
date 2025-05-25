@@ -1,11 +1,19 @@
-import { StyleSheet, Image, Text, View } from "react-native";
+import { StyleSheet, Image, Button, Text, View } from "react-native";
 import { useTheme } from "../context/ThemeContext";
 import Layout from "../components/layout/Layout";
 import ProfileInfo from "../components/ProfileInfo";
 import PrimaryButton from '../components/PrimaryButton';
+import { useAuth } from '../context/AuthContext';
 
 const ProfileScreen = () => {
   const { theme, toggleTheme } = useTheme(); //  theme: ett objekt som innehåller colors, textStyles m.m och även ett mode - light eller dark
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    console.log("Logging out...");
+    logout();
+  };
+  
   return (
     <Layout scrollable>
       <View style={styles.container}>
@@ -34,6 +42,10 @@ const ProfileScreen = () => {
         accessibilityRole="button"
         accessibilityLabel="Logout"
         accessibilityHint="Log out from your account"
+        onPress={() => {
+          console.log("Logout button pressed!");
+          logout();
+        }}   
       />
 
       </View>
@@ -57,22 +69,3 @@ const styles = StyleSheet.create({
     width: 150,
   },
 });
-
-// {/* <Text style={{ color: theme.colors.heading, marginBottom: 8 }}>
-//   Dark Mode
-// </Text> */}
-
-//  {/* Switchknappen visar om mörkt läge är aktivt.
-//   När man trycker på den, körs toggleTheme och byter till motsatt läge.
-//   Då ändras färger och stilar i hela appen via theme .
-// */}
-// {/* <Switch 
-// value={theme.mode === "dark"} // Om appens tema är "dark", visa att switchen är på, annars visa att switchen är av (ljusläge är aktivt)
-// onValueChange={toggleTheme} 
-// accessibilityLabel="Activate dark mode or light mode"
-// />     */}
-
-// {/* <ThemeSwitch
-//   isOn={theme.mode === "dark"} // Om temat är mörkt, visa att switchen är på
-//   onToggle={toggleTheme}        // Kör funktionen för att växla tema
-// /> */}
