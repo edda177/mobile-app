@@ -11,12 +11,26 @@ import {
 } from "./StackNavigator";
 import { useTheme } from "../context/ThemeContext";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useEffect, useState } from "react";
+import { getNotWatched } from "../utils/notWatchedNews";
+import { useNotWatched } from "../context/NewsContext";
+// Behåll även om den är utgråad! - for now
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Tab = createBottomTabNavigator();
-
+// Funktion för att kunna börja om att visa nyhets-notiserna
+// AsyncStorage.removeItem("NotWatched");
 const TabNavigator = () => {
+  const { badgeNumber } = useNotWatched();
   const { theme } = useTheme();
-  const notification = 3;
+
+  useEffect(() => {
+    const asynFunc = async () => {
+      const result = await getNotWatched();
+    };
+    asynFunc();
+  }, []);
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -45,19 +59,6 @@ const TabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
-          // News-knappen i headern:
-          headerRight: () => (
-            <Pressable onPress={() => navigation.navigate("Testing")}>
-              <Text>News</Text>
-              <MaterialCommunityIcons
-                name="numeric-3-circle"
-                color={theme.colors.warning}
-                size={18}
-              />
-            </Pressable>
-          ),
-          // notis på hem-tabben:
-          tabBarBadge: notification,
         })}
       />
       <Tab.Screen
@@ -71,6 +72,8 @@ const TabNavigator = () => {
               size={size}
             />
           ),
+          // notis på news-tabben
+          tabBarBadge: badgeNumber !== 0 ? badgeNumber : undefined,
         }}
       />
       <Tab.Screen
@@ -100,11 +103,7 @@ const TabNavigator = () => {
         component={SettingsStackNavigator}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="cog"
-              color={color}
-              size={size}
-            />
+            <MaterialCommunityIcons name="cog" color={color} size={size} />
           ),
         }}
       />

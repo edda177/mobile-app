@@ -3,28 +3,75 @@ import { useTheme } from "../context/ThemeContext";
 import Card from "./Card";
 import { useNavigation } from "@react-navigation/native";
 import NewsCard from "./NewsCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getFirstNotWatched } from "../utils/notWatchedNews";
+import { useNotWatched } from "../context/NewsContext";
 
 const CardSection = ({ title, prevTitle, route, arrow = true }) => {
   const { theme } = useTheme(); // Get theme
+
+  const { stackTitle } = route ? route.params : {};
   const [news, setNews] = useState([]);
+  const { notWatched, setNotWatched } = useNotWatched();
+  let notWatchList = [];
+  const styles = createStyles(theme, notWatched);
   const navigations = useNavigation();
   let category = "";
-  const { stackTitle } = route ? route.params : {};
+
   if (title !== undefined || null) {
     category = title.replaceAll(" ", "_");
   }
   if (stackTitle !== undefined) {
     category = stackTitle.replaceAll(" ", "_");
   }
-
   if (news == "") {
     const data = require("../data/news.json");
     setNews(data);
   }
   const singleNews = news.find((item) => item.heading === title);
+
+  useEffect(() => {
+    getFirstNotWatched(notWatchList, setNotWatched, notWatched, news);
+  }, []);
+
+  const handleNewsPress = (item) => {
+    const saveNotWatched = async () => {
+      try {
+        const result = await AsyncStorage.setItem(
+          "NotWatched",
+          JSON.stringify(notWatchList)
+        );
+
+        if (!result) {
+          throw new Error("Problem with saving not watched status to storage");
+        }
+      } catch (error) {
+        console.error(error.message, error);
+      }
+    };
+    notWatchList = notWatched;
+
+    const foundIndex = notWatched.indexOf(item.heading);
+
+    if (foundIndex !== -1) {
+      if (notWatched.length > 1) {
+        notWatchList.splice(foundIndex, 1);
+      } else if (notWatched.length === 1) {
+        notWatchList[0] = "";
+      }
+      saveNotWatched();
+      setNotWatched(notWatchList);
+    }
+
+    navigations.navigate("DataScreen", {
+      stackTitle: item.heading,
+      prevTitle: title,
+    });
+  };
+
   return (
-    <View accessible={true} style={{ flex: 1, gap: 16 }}>
+    <View accessible={true} style={styles.outerContainer}>
       {prevTitle === undefined && (
         <Text
           style={
@@ -45,17 +92,25 @@ const CardSection = ({ title, prevTitle, route, arrow = true }) => {
         news.map((item) => (
           <Pressable
             key={item.id}
+            style={[
+              notWatched.find((itm) => itm === item.heading)
+                ? styles.noWatch
+                : styles.watched,
+              styles.pressable,
+            ]}
             accessibilityRole="link"
             accessibilityLabel={`Link to ${item.heading} page`}
             accessibilityHint={`Go to ${item.heading} page for more information`}
-            onPress={() =>
-              navigations.navigate("DataScreen", {
-                stackTitle: item.heading,
-                prevTitle: title,
-              })
-            }
+            onPress={() => {
+              handleNewsPress(item);
+            }}
           >
-            <NewsCard item={item} arrow={arrow} showMore={false} />
+            <NewsCard
+              item={item}
+              arrow={arrow}
+              showMore={false}
+              notWatched={notWatched[item.id - 1]}
+            />
           </Pressable>
         ))}
       {title !== "News" && prevTitle !== "News" && (
@@ -82,4 +137,17 @@ const CardSection = ({ title, prevTitle, route, arrow = true }) => {
 
 export default CardSection;
 
-const styles = StyleSheet.create({});
+const createStyles = (theme, notWatched) =>
+  StyleSheet.create({
+    outerContainer: { flex: 1, gap: 16 },
+    pressable: {
+      borderWidth: 2,
+      borderRadius: theme.radius.lg,
+    },
+    noWatch: {
+      borderColor: theme.colors.accent,
+    },
+    watched: {
+      borderColor: theme.colors.snow,
+    },
+  });

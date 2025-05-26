@@ -7,10 +7,19 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 const DataScreen = ({ route, title, navigation }) => {
   const { stackTitle, prevTitle } = route.params || "Temperature";
   const { theme } = useTheme();
+  const handleOnPress = () => {
+    console.log(prevTitle, title, stackTitle);
+    if (prevTitle === "News") {
+      navigation.navigate("News");
+    } else {
+      navigation.goBack();
+    }
+  };
+
   return (
     <Layout scrollable>
       <View style={{ flex: 1, gap: 24 }}>
-        <Pressable onPress={() => navigation.goBack()}>
+        <Pressable onPress={() => handleOnPress()}>
           <MaterialCommunityIcons
             name="chevron-left"
             size={40}
