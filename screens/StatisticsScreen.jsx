@@ -1,7 +1,6 @@
 import { Text, View } from "react-native";
 import { useTheme } from "../context/ThemeContext";
 import Layout from "../components/layout/Layout";
-//import { useAuth } from '../context/AuthContext';
 
 const StatisticsScreen = () => {
   const { theme } = useTheme(); // Get theme

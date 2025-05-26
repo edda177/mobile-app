@@ -92,30 +92,8 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     alignItems: 'center',
     elevation: 2,
-    // borderTopLeftRadius: 0,
-    // borderTopRightRadius: 10,
-    // borderBottomRightRadius: 10,
-    // borderBottomLeftRadius: 0,
   },
 });
-
-  // icon: {
-  //   marginRight: 12,
-  // },
-  // messageContainer: {
-  //   flex: 1,
-  // },
-  // title: {
-  //   fontWeight: '600',
-  //   fontSize: 16,
-  //   marginBottom: 4,
-  //   color: '#333',
-  // },
-  // message: {
-  //   fontSize: 14,
-  //   color: '#444',
-  // },
-
 
 /* Hur fungerar koden?
 
