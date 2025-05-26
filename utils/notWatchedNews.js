@@ -7,9 +7,9 @@ export const saveNotWatched = async (notWatchList) => {
       JSON.stringify(notWatchList)
     );
 
-    if (!result) {
-      throw new Error("Problem with saving not watched status to storage");
-    }
+    // if (!result) {
+    //   throw new Error("Problem with saving not watched status to storage");
+    // }
     storageList = notWatchList;
     return "it worked setting to storage";
   } catch (error) {
@@ -47,9 +47,7 @@ export const getNotWatched = async () => {
   try {
     const result = await AsyncStorage.getItem("NotWatched");
     const data = await JSON.parse(result);
-    if (!data) {
-      throw new Error("cannot get length");
-    }
+
     return data;
   } catch (error) {
     console.error(error);

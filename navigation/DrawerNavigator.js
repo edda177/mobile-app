@@ -27,7 +27,7 @@ const DrawerNavigator = () => {
           swipeEnabled: true,
           headerStyle: {
             backgroundColor: theme.colors.primary,
-            height: Platform.OS === "ios" ? 70 : 70, // Ökad headerhöjd
+            height: Platform.OS === "ios" ? 70 : 90, // Ökad headerhöjd
           },
           drawerStyle: {
             marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
@@ -88,7 +88,6 @@ const DrawerNavigator = () => {
             }}
           />
         ))}
-        <Drawer.Item onPress={() => logOut()} />
       </Drawer.Navigator>
     </>
   );

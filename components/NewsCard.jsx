@@ -70,7 +70,7 @@ const createStyles = (theme) =>
     },
     innerContainer: {
       backgroundColor: theme.colors.snow,
-      borderRadius: theme.radius.lg,
+      borderRadius: theme.radius.md,
       paddingHorizontal: 16,
       paddingVertical: 16,
       flex: 1,
@@ -84,6 +84,6 @@ const createStyles = (theme) =>
     image: {
       width: "100%",
       height: 240,
-      borderRadius: theme.radius.lg,
+      borderRadius: theme.radius.md,
     },
   });

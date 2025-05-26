@@ -43,11 +43,11 @@ const CardSection = ({ title, prevTitle, route, arrow = true }) => {
           JSON.stringify(notWatchList)
         );
 
-        if (!result) {
-          throw new Error("Problem with saving not watched status to storage");
-        }
+        // if (!result) {
+        //   throw new Error("Problem with saving not watched status to storage");
+        // }
       } catch (error) {
-        console.error(error.message, error);
+        console.error(error);
       }
     };
     notWatchList = notWatched;
@@ -142,7 +142,7 @@ const createStyles = (theme) =>
     outerContainer: { flex: 1, gap: 16 },
     pressable: {
       borderWidth: 2,
-      borderRadius: theme.radius.lg,
+      borderRadius: theme.radius.md,
     },
     noWatch: {
       borderColor: theme.colors.accent,
