@@ -10,7 +10,7 @@ const StatisticsScreen = () => {
       <View>
 
         <View style={{ marginBottom: 20 }}>
-          <Text style={[theme.textStyles.titleLarge]}>Statistics</Text>
+          <Text style={[theme.textStyles.titleLarge]} accessibilityRole="header">Statistics</Text>
 
           <Text>Statistics on data will be presented here.</Text>     
         </View>  
