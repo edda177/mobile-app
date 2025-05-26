@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useTheme } from "../context/ThemeContext";
 
@@ -18,7 +18,7 @@ const ProfileInfo = () => {
   useEffect(() => {
     // TODO: Ersätt URL nedan när API är tillgängligt
     /*
-    fetch("https://your-api-url.com/profile")
+    fetch("https://our-api-url.com/profile")
       .then((res) => res.json())
       .then((data) => setProfileData(data))
       .catch((error) => console.error("Error fetching profile:", error));

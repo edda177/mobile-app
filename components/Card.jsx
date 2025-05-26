@@ -12,15 +12,7 @@ const Card = ({ title, arrow }) => {
   const [unit, setUnit] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // useEffect(() => {
-  //   const data = require("../data/data.json");
-  //   let value = "";
-  //   if (!data) {
-  //     setIsLoading(false);
-  //     setError("Något gick fel med att hämta datan");
-  //   }
-
+  
     useEffect(() => {
       const apiData = getData(title);
       console.log(apiData);

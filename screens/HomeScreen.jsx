@@ -6,7 +6,7 @@ import CardSection from "../components/CardSection";
 import dataList from "../utils/dataList.js";
 import WarningCard from "../components/WarningCard";
 //import { LayoutAnimation } from "react-native";
-// //import { getData } from "../services/api";
+// import { getData } from "../services/api";
 
 const HomeScreen = () => {
   const { theme } = useTheme(); // Get theme
