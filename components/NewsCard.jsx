@@ -47,7 +47,7 @@ const NewsCard = ({ item, arrow, showMore }) => {
           style={styles.image}
           resizeMode="cover"
         />
-        <Text style={theme.textStyles.titleMedium}>{item.heading}</Text>
+        <Text style={theme.textStyles.unitSmall}>{item.heading}</Text>
         {showMore ? (
           <Text style={theme.textStyles.textBody}>{item.message}</Text>
         ) : (

@@ -7,7 +7,6 @@ import {
   SettingsStackNavigator,
   StatStackNavigator,
   ProfileStackNavigator,
-  LoginStackNavigator,
 } from "./StackNavigator";
 import { useTheme } from "../context/ThemeContext";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -90,15 +89,6 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Profile"
-        component={ProfileStackNavigator}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
         name="Settings"
         component={SettingsStackNavigator}
         options={{
@@ -107,20 +97,16 @@ const TabNavigator = () => {
           ),
         }}
       />
-      <Tab.Screen
-        name="Login"
-        component={LoginStackNavigator}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="login-variant"
-              color={color}
-              size={size}
-            />
-          ),
-        }}
-      />
-    </Tab.Navigator>
+    <Tab.Screen
+          name="Profile"
+          component={ProfileStackNavigator}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="account" color={color} size={size} />
+            ),
+          }}
+        />
+      </Tab.Navigator>
   );
 };
 

@@ -7,11 +7,11 @@ const ProfileInfo = () => {
 
   // Temporär lokal state – kan ersättas med API-data
   const [profileData, setProfileData] = useState({
-    username: "loremipsum",
-    email: "example@mail.com",
+    username: "maggiepearson",
+    email: "maggie.pearson@ecobuild.com",
     phonenumber: "+46 78 993 65 12",
-    workplace: "Lorem Ipsum",
-    jobTitle: "Ultricies",
+    workplace: "EcoBuild Solutions",
+    jobTitle: "Construction Engineer",
   });
 
   // Förbered för API-hämtning
