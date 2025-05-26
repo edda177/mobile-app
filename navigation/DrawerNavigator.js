@@ -1,12 +1,8 @@
-import { View, Text, Pressable, Platform, StatusBar } from "react-native";
-import React from "react";
+import { View, Platform, StatusBar } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import DataScreen from "../screens/DataScreen";
-import { DataStackNavigator, HomeStackNavigator } from "./StackNavigator";
 import TabNavigator from "./TabNavigator";
-import { Image } from "react-native-svg";
 import Logo from "../components/Logo";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useTheme } from "../context/ThemeContext";
 
 const Drawer = createDrawerNavigator();
@@ -31,6 +27,7 @@ const DrawerNavigator = () => {
           swipeEnabled: true,
           headerStyle: {
             backgroundColor: theme.colors.primary,
+            height: Platform.OS === "ios" ? 70 : 70, // Ökad headerhöjd
           },
           drawerStyle: {
             marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
@@ -43,9 +40,7 @@ const DrawerNavigator = () => {
           drawerActiveBackgroundColor: theme.colors.snow,
           drawerActiveTintColor: theme.colors.heading,
           drawerInactiveTintColor: theme.colors.heading,
-          headerTitleStyle: {
-            display: "none",
-          },
+          headerTitleAlign: "left", // Fixar vänsterjustering i iOS
           headerTintColor: theme.colors.tabicon,
         }}
       >
@@ -57,14 +52,22 @@ const DrawerNavigator = () => {
             drawerItemStyle: {
               display: "none",
             },
-
-            headerTitle: () => {
-              return (
-                <View>
-                  <Logo width={140} height={34} color={theme.colors.tabicon} />
-                </View>
-              );
-            },
+            headerTitle: () => (
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  paddingLeft: Platform.OS === "ios" ? 0 : 16,
+                  alignItems: "flex-start",
+                }}
+              >
+                <Logo
+                  width={140}
+                  height={34}
+                  color={theme.colors.tabicon}
+                />
+              </View>
+            ),
           }}
         />
         {screenList.map((item, index) => (
@@ -74,22 +77,22 @@ const DrawerNavigator = () => {
             component={DataScreen}
             initialParams={{ stackTitle: item }}
             options={{
-              headerTitle: () => {
-                return (
-                  <View
-                    style={{
-                      justifyContent: "center",
-                      alignItems: "flex-start",
-                    }}
-                  >
-                    <Logo
-                      width={140}
-                      height={34}
-                      color={theme.colors.tabicon}
-                    />
-                  </View>
-                );
-              },
+              headerTitle: () => (
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    paddingLeft: Platform.OS === "ios" ? 0 : 16,
+                    alignItems: "flex-start",
+                  }}
+                >
+                  <Logo
+                    width={140}
+                    height={34}
+                    color={theme.colors.tabicon}
+                  />
+                </View>
+              ),
             }}
           />
         ))}
