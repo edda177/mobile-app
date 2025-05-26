@@ -14,8 +14,8 @@ const Card = ({ title, arrow }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const apiData = getData(title);
-    console.log(apiData);
+    // const apiData = getData(title);
+    // console.log(apiData);
     const data = require("../data/data.json");
     let value = "";
 

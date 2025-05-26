@@ -13,7 +13,7 @@ export const saveNotWatched = async (notWatchList) => {
     storageList = notWatchList;
     return "it worked setting to storage";
   } catch (error) {
-    console.error(error.message, error);
+    console.error(error);
   }
 };
 export const getFirstNotWatched = async (
@@ -40,7 +40,7 @@ export const getFirstNotWatched = async (
       return JSON.parse(result);
     }
   } catch (error) {
-    console.error(error.message, error);
+    console.error(error);
   }
 };
 export const getNotWatched = async () => {
@@ -52,6 +52,6 @@ export const getNotWatched = async () => {
     }
     return data;
   } catch (error) {
-    console.error(error.message, error);
+    console.error(error);
   }
 };

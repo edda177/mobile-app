@@ -61,11 +61,7 @@ const DrawerNavigator = () => {
                   alignItems: "flex-start",
                 }}
               >
-                <Logo
-                  width={140}
-                  height={34}
-                  color={theme.colors.tabicon}
-                />
+                <Logo width={140} height={34} color={theme.colors.tabicon} />
               </View>
             ),
           }}
@@ -86,16 +82,13 @@ const DrawerNavigator = () => {
                     alignItems: "flex-start",
                   }}
                 >
-                  <Logo
-                    width={140}
-                    height={34}
-                    color={theme.colors.tabicon}
-                  />
+                  <Logo width={140} height={34} color={theme.colors.tabicon} />
                 </View>
               ),
             }}
           />
         ))}
+        <Drawer.Item onPress={() => logOut()} />
       </Drawer.Navigator>
     </>
   );
