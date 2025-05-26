@@ -38,7 +38,6 @@ const LoginFormScreen = ({ navigation }) => {
                   style={styles.input}
                   accessibilityLabel="Username input field"
                   accessibilityHint="Enter your username"
-
               />
 
               <Text style={theme.textStyles.inputTitle}>Password</Text>
