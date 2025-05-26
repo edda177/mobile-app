@@ -6,11 +6,15 @@ A mobile application built with **React Native** and **Expo**, designed to desig
 
 ## Features
 
-- Secure login and authentication
-- Local data storage using Expo Secure Store
-- Responsive and consistent UI with custom fonts
+- Consistent UI
+- Light and dark theme 
 - Stack-based navigation
-- [LÄGG TILL FLER FUNKTIONER HÄR SEDAN]
+- Login / Logout
+- News feed
+- Profile information
+- Warning cards
+- Collected data from sensors
+- Local data storage using Expo Secure Store
 
 ---
 
@@ -62,16 +66,6 @@ npm install @react-navigation/native
 ```bash
 npm install @react-native/drawer
 ```
-
-#### Menu
-
-```bash
-npm install @react-native-menu/menu
-```
-
-> ```jsx
-> Komponent: <MenuView />;
-> ```
 
 >     Props Required
 >
