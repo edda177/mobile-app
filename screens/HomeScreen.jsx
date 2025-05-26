@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { StyleSheet, Text, View, LayoutAnimation } from "react-native";
 import { useTheme } from "../context/ThemeContext";
 import Layout from "../components/layout/Layout";
@@ -6,7 +6,6 @@ import CardSection from "../components/CardSection";
 import dataList from "../utils/dataList.js";
 import WarningCard from "../components/WarningCard";
 //import { LayoutAnimation } from "react-native";
-// import { getData } from "../services/api";
 
 const HomeScreen = () => {
   const { theme } = useTheme(); // Get theme

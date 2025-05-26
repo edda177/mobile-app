@@ -55,7 +55,7 @@ const SettingsScreen = () => {
   return (
     <Layout scrollable>
       <View style={{ marginBottom: 20 }}>
-        <Text style={[theme.textStyles.titleLarge]}>Settings</Text>
+        <Text style={[theme.textStyles.titleLarge]} accessibilityRole="header">Settings</Text>
 
         <Text style={{ color: theme.colors.heading, marginBottom: 8 }}>
           {theme.mode === 'dark' ? 'Mode: Dark' : 'Mode: Light '}
