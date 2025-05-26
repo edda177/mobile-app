@@ -6,6 +6,7 @@ import ProfileScreen from "../screens/ProfileScreen";
 import DataScreen from "../screens/DataScreen";
 import LoginFormScreen from "../screens/LoginFormScreen";
 import SettingsScreen from "../screens/SettingsScreen";
+import StatisticsScreen from "../screens/StatisticsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -65,7 +66,7 @@ const StatStackNavigator = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Statistics" component={SettingsScreen} />
+      <Stack.Screen name="Statistics" component={StatisticsScreen} />
     </Stack.Navigator>
   );
 };

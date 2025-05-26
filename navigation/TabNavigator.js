@@ -7,7 +7,6 @@ import {
   SettingsStackNavigator,
   StatStackNavigator,
   ProfileStackNavigator,
-  LoginStackNavigator,
 } from "./StackNavigator";
 import { useTheme } from "../context/ThemeContext";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
