@@ -8,9 +8,8 @@ const DataScreen = ({ route, title, navigation }) => {
   const { stackTitle, prevTitle } = route.params || "Temperature";
   const { theme } = useTheme();
   const handleOnPress = () => {
-    console.log(prevTitle, title, stackTitle);
     if (prevTitle === "News") {
-      navigation.navigate("News");
+      navigation.navigate("NewsStack");
     } else {
       navigation.goBack();
     }

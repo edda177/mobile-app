@@ -21,11 +21,11 @@ const Card = ({ title, arrow }) => {
   //     setError("Något gick fel med att hämta datan");
   //   }
 
-    useEffect(() => {
-      const apiData = getData(title);
-      console.log(apiData);
-      const data = require("../data/data.json");
-      let value = "";
+  useEffect(() => {
+    const apiData = getData(title);
+    console.log(apiData);
+    const data = require("../data/data.json");
+    let value = "";
 
     switch (title) {
       case "temperature":

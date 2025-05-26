@@ -64,7 +64,7 @@ const CardSection = ({ title, prevTitle, route, arrow = true }) => {
       setNotWatched(notWatchList);
     }
 
-    navigations.navigate("DataScreen", {
+    navigations.navigate("DataStack", {
       stackTitle: item.heading,
       prevTitle: title,
     });
@@ -123,7 +123,7 @@ const CardSection = ({ title, prevTitle, route, arrow = true }) => {
             title ? title : stackTitle
           } page for more information`}
           onPress={() =>
-            navigations.navigate("DataScreen", {
+            navigations.navigate("DataStack", {
               stackTitle: title !== undefined ? title : stackTitle,
             })
           }
@@ -137,7 +137,7 @@ const CardSection = ({ title, prevTitle, route, arrow = true }) => {
 
 export default CardSection;
 
-const createStyles = (theme, notWatched) =>
+const createStyles = (theme) =>
   StyleSheet.create({
     outerContainer: { flex: 1, gap: 16 },
     pressable: {

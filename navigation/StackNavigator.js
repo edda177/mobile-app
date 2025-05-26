@@ -19,9 +19,9 @@ const HomeStackNavigator = ({ route }) => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="HomeStack" component={HomeScreen} />
       <Stack.Screen
-        name="DataScreen"
+        name="DataStack"
         component={DataScreen}
         initialParams={{ title: title }}
       />
@@ -37,9 +37,9 @@ const NewsStackNavigator = ({ route }) => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="News" component={NewsScreen} />
+      <Stack.Screen name="NewsStack" component={NewsScreen} />
       <Stack.Screen
-        name="DataScreen"
+        name="DataStack"
         component={DataScreen}
         initialParams={{ title: title }}
       />
@@ -54,7 +54,7 @@ const SettingsStackNavigator = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Settings" component={SettingsScreen} />
+      <Stack.Screen name="SettingsStack" component={SettingsScreen} />
     </Stack.Navigator>
   );
 };
@@ -66,7 +66,7 @@ const StatStackNavigator = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Statistics" component={StatisticsScreen} />
+      <Stack.Screen name="StatisticsStack" component={StatisticsScreen} />
     </Stack.Navigator>
   );
 };
@@ -78,7 +78,7 @@ const ProfileStackNavigator = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="ProfileStack" component={ProfileScreen} />
     </Stack.Navigator>
   );
 };
@@ -91,7 +91,7 @@ const LoginStackNavigator = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Login" component={LoginFormScreen} />
+      <Stack.Screen name="LoginStack" component={LoginFormScreen} />
     </Stack.Navigator>
   );
 };
@@ -101,7 +101,7 @@ const DataStackNavigator = ({ route }) => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
-        name="Data"
+        name="DataStack"
         component={DataScreen}
         initialParams={{ stackTitle: stackTitle }}
       />

@@ -23,7 +23,6 @@ export const getFirstNotWatched = async (
   news
 ) => {
   try {
-    console.log("notWatchList:", notWatchList);
     const result = await AsyncStorage.getItem("NotWatched");
     const data = await JSON.parse(result);
     if (data == "[]" || data == null || data == undefined) {
