@@ -142,7 +142,7 @@ const createStyles = (theme) =>
     outerContainer: { flex: 1, gap: 16 },
     pressable: {
       borderWidth: 2,
-      borderRadius: theme.radius.md,
+      borderRadius: theme.radius.md + 2,
     },
     noWatch: {
       borderColor: theme.colors.accent,
