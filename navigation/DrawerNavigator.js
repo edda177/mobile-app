@@ -37,7 +37,7 @@ const DrawerNavigator = () => {
             borderTopLeftRadius: 16,
             borderBottomLeftRadius: 16,
           },
-          drawerActiveBackgroundColor: theme.colors.snow,
+          drawerActiveBackgroundColor: theme.colors.tabicon,
           drawerActiveTintColor: theme.colors.heading,
           drawerInactiveTintColor: theme.colors.heading,
           headerTitleAlign: "left", // Fixar vänsterjustering i iOS

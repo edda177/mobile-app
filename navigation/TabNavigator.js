@@ -37,7 +37,7 @@ const TabNavigator = () => {
 
         tabBarStyle: {
           backgroundColor: theme.colors.primary,
-          height: 80,
+          height: Platform.OS === "android" ? 100 : 80,
         },
         tabBarIconStyle: { marginTop: 8 },
         tabBarLabelStyle: { marginBottom: 12, fontSize: 12 },

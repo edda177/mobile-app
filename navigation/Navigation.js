@@ -36,7 +36,10 @@ const Navigation = () => {
   Annars visas inloggningsformuläret (LoginFormScreen) */
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor={theme.colors.background} />
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={theme.colors.background}
+      />
       <SafeAreaView style={styles.safeArea}>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -56,7 +59,7 @@ const createStyles = () =>
   StyleSheet.create({
     safeArea: {
       flex: 1,
-      paddingBottom: Platform.OS === "android" ? 50 : 0,
+      // paddingBottom: Platform.OS === "android" ? 50 : 0,
     },
   });
 
