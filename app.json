@@ -4,35 +4,28 @@
     "slug": "mobile-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+
+    "platforms": ["android"],
+    "sdkVersion": "53.0.9",
+    "updates": {
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/c0e6a283-104a-4b7e-9464-af3803db3ff8"
     },
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.bexgren.mobileapp",
-      "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
-      }
-    },
+
+    "assetBundlePatterns": ["**/*"],
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.bexgren.mobileapp"
+      "package": "com.bexgren.mobileapp",
+      "versionCode": 1,
+      "permissions": []
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      "expo-font",
-      "expo-secure-store"
-    ],
+    "plugins": ["expo-font", "expo-secure-store"],
     "extra": {
       "eas": {
         "projectId": "c0e6a283-104a-4b7e-9464-af3803db3ff8"
@@ -41,8 +34,7 @@
     "runtimeVersion": {
       "policy": "appVersion"
     },
-    "updates": {
-      "url": "https://u.expo.dev/c0e6a283-104a-4b7e-9464-af3803db3ff8"
-    }
+
+    "owner": "bexgren"
   }
 }

@@ -22,22 +22,21 @@
 // };
 
 const BASE_URL = "http://localhost:8766/api/";
+const API_URL = process.env.EXPO_PUBLIC_API_URL;
 
 export const getData = async (title) => {
-    try {
-        const response = await fetch (`${BASE_URL}/data/latest/`, {
-        });
+  try {
+    const response = await fetch(`${API_URL}/data/latest/`, {});
 
-        if (!response.ok) throw new Error("Error collecting data");
+    if (!response.ok) throw new Error("Error collecting data");
 
-        const data = await response.json(); 
-        console.log(data[0].temperature);
-        console.log(data[0][title]);
-        console.log(title);
-        return await data[0].title; 
-
-    } catch(error) {
-        console.error("Error collecting data", error);
-        return null;
-    }
+    const data = await response.json();
+    console.log(data[0].temperature);
+    console.log(data[0][title]);
+    console.log(title);
+    return await data[0].title;
+  } catch (error) {
+    console.error("Error collecting data", error);
+    return null;
+  }
 };
