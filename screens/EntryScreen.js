@@ -12,12 +12,12 @@ const EntryScreen = () => {
       Animated.timing(opacity, {
         toValue: 1,
         duration: 800,
-        useNativeDriver: false,
+        useNativeDriver: true,
       }),
       Animated.spring(scale, {
         toValue: 1,
         friction: 3,
-        useNativeDriver: false,
+        useNativeDriver: true,
       }),
     ]).start();
   }, []);

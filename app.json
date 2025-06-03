@@ -4,23 +4,15 @@
     "slug": "mobile-app",
     "version": "1.0.0",
     "orientation": "portrait",
-
-    "platforms": ["android"],
-    "sdkVersion": "53.0.9",
-    "updates": {
-      "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/c0e6a283-104a-4b7e-9464-af3803db3ff8"
+    "ios": {
+      "supportsTablet": true
     },
-
-    "assetBundlePatterns": ["**/*"],
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.bexgren.mobileapp",
-      "versionCode": 1,
-      "permissions": []
+      "package": "com.edda.mobileapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -28,13 +20,9 @@
     "plugins": ["expo-font", "expo-secure-store"],
     "extra": {
       "eas": {
-        "projectId": "c0e6a283-104a-4b7e-9464-af3803db3ff8"
+        "projectId": "9463af08-0a43-40fa-8462-ec21db55d2c5"
       }
     },
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
-
-    "owner": "bexgren"
+    "owner": "eddahall"
   }
 }
